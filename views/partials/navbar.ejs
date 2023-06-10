@@ -1,0 +1,46 @@
+<head>
+    <link rel="stylesheet" href="/public/images/css/dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  </head>
+  
+  <!-- Navbar -->
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+        aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Brand -->
+      <a class="navbar-brand" href="/users/dashboard">
+        <h2>BloodBank</h2>
+      </a>
+  
+  
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <h1></h1>
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+            id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- <img src="/public/images/logo1.png" class="rounded-circle"
+              height="35" alt="Avatar" loading="lazy" /> -->
+              <span style=" font-weight: 100; font-size: 15px;"><b class="text-light"><%=user.name%></b></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="/users/profile">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/users/logout">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->

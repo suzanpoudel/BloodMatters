@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='/public/Login.css'>
+    <link rel="icon" href='/public/Images/BloodMattresLogo.png' type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<title>Start Saving Lives </title>
+
+<body>
+    <header>
+        <div id="nav">
+            <div class="header-logo"> <a href="/"><img src="/public/Images/BloodMattresLogo.png"></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="inner">
+        <div class="photo">
+            <img src="/public/Images/registerINAGE.jpg">
+        </div>
+        <div class="user-form">
+            <h1>Start Saving Lives</h1>
+            <%- include('./partials/messages.ejs'); %>
+            <form action="/users/login" method="post">
+                <i class="fas fa-envelope-square"></i>
+                <input type="email" name="email" placeholder="E-mail" value="<%= typeof email != 'undefined' ? email : '' %>">
+                <br>
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" name="password" id="password2" value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
+                <div class="action-button">
+                    <button type="submit" class="button primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/public/Register.js"></script>
+</body>
+
+</html>

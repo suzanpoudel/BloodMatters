@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300&display=swap');
+
+body {
+    background: url('./Images/ug.png');
+}
+
+#nav {
+    width: 90%;
+    color: black;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: "Neuton", serif;
+    line-height: 50px;
+  }
+  
+  #nav img {
+    width: 150px;
+    padding-left: 20px;
+    padding-top: 10px;
+    top: 0%;
+  }
+  
+  #nav .header-list {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .header-list ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 8px 15px;
+    position: relative;
+  }
+  
+  .header-list ul li a {
+    color: black;
+    font-size: 24px;
+    text-decoration: none;
+    font-family: "Fredoka One", cursive;
+  }
+  
+  
+.header-list ul li::after {
+    content: "";
+    height: 2px;
+    background: #cd5c5c;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+    width: 0%;
+  }
+  
+  .header-list ul li:hover::after {
+    width: 100%;
+  }
+
+header {
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+    background-attachment: fixed;
+}
+
+.header-logo {
+    position: absolute;
+    top: 9%;
+    left: 5%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: "Neuton", serif;
+    line-height: 30px;
+    margin-bottom: 10px;
+
+}
+
+.header-logo>img {
+    width: 70%;
+}
+
+    /* li a {
+        text-decoration: none;
+        display: block;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: black;
+        font-size: 20px;
+        font-family: 'Raleway', sans-serif;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        padding: 20px;
+        transition: all ease 0.5s;
+    }
+
+    li {
+        float: right;
+        padding-left: 30px;
+        padding-top: 30px;
+        list-style: none;
+        padding-right: 40px;
+        font-size: 24px;
+    } */
+
+/* header ul li a:hover {
+    background-color: rgba(220, 20, 60);
+    color: white;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.inner {
+    height: 85%;
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 10px 10px 68px -6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.photo {
+    width: 50%;
+    height: 100%;
+}
+
+.photo img {
+    width: 110%;
+    height: 100%;
+}
+
+.user-form {
+    background: #a82020;
+    padding: 40px;
+    width: 50%;
+    height: 100%;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.user-form h1 {
+    color: #fff;
+    padding: 30px 0;
+    margin: 25px 10px;
+    font-weight: 700;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    letter-spacing: 2px;
+}
+
+.user-form i {
+    position: absolute;
+    margin: 25px 10px;
+    color: #F08080;
+}
+
+input {
+    width: 100%;
+    height: 3em;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    margin: 10px 0;
+    padding: 0 30px;
+}
+
+.safety {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.line {
+    height: 6px;
+    border-radius: 20px;
+    width: 20%;
+    background: #fff;
+    margin: 5px;
+}
+
+.action-button {
+    width: 100%;
+    display: flex;
+    margin: 20px 0;
+}
+
+.button {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    border: 1px solid #fff;
+    padding: 10px;
+    background: transparent;
+    border-radius: 20px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 700px;
+    font-size: medium;
+    margin: 0 10px;
+    background: none;
+    border: 2px solid white;
+    color: white;
+}
+
+.primary {
+    font-size: medium;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    background: none;
+    border: 2px solid white;
+    color: white;
+
+}
+
+.primary:hover {
+    background: linear-gradient(45deg, yellow 24%, orange 100%);
+    border: none;
+    color: black;
+
+
+}
+
+.button:hover {
+    background: linear-gradient(45deg, rgb(232, 234, 239) 24%, rgb(98, 100, 106) 100%);
+    border: none;
+    color: black;
+}
+
+@media(max-width:700px) {
+    .photo {
+        display: none;
+    }
+
+    .user-form {
+        width: 100%;
+        border-radius: 10px;
+        font-size: 20px
+    }
+
+    .action-button {
+        margin: 5px;
+        display: block;
+        width: 100%;
+    }
+
+    .button {
+        width: 100%;
+        margin: 5px;
+        padding: 5px;
+
+    }
+}
+
+@media screen and (max-width:990px) and (min-width:665px) {
+    .action-button {
+        margin: 5px;
+        display: block;
+        width: 100%;
+    }
+
+    .button {
+        width: 100%;
+        margin: 5px;
+        padding: 5px;
+    }
+}
