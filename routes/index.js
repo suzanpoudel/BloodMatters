@@ -1,8 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated, forwardAuthenticatedUser } = require('../config/auth');
+
+const {
+  welcome,
+  getUsers,
+  getUserById,
+  getErrorPage,
+} = require("../controllers/index.controller");
+
+const {
+  ensureAuthenticated,
+  forwardAuthenticatedUser,
+} = require("../config/auth");
 
 // Welcome Page
-router.get('/', (req, res) => res.render('index'));
+router.get("/", ensureAuthenticated, welcome);
+
+router.get("/errorpage", ensureAuthenticated, getErrorPage);
+
+router.get("/userslist", ensureAuthenticated, getUsers);
+
+router.get("/profile/:id", ensureAuthenticated, getUserById);
 
 module.exports = router;

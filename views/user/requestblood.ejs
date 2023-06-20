@@ -1,0 +1,62 @@
+<%-include('.././partials/navbar.ejs'); %> 
+<%-include('.././partials/sidemenu.ejs'); %>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+  integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+  crossorigin="anonymous"
+/>
+
+<!--Main layout-->
+<!-- <main style="margin-top: 58px;">
+    <div class="container pt-4">
+        <h1>Hello world</h1>
+    </div>
+  </main> -->
+<!--Main layout-->
+
+<main>
+  <div class="px-4 py-5 my-5 text-center">
+    <form action="/users/requestblood" method="POST">
+      <div class="col-5 m-auto mt-5">
+        <div class="card border-1 border-dark">
+          <div class="card-body">
+            <div class="form-group ">
+              <label class="form-label"><h4>Request Blood</h4></label>
+              <hr>
+              <%- include('.././partials/messages.ejs'); %>
+                    <div class="input-group">
+                      <label class="form-label m-auto col-4"><h6>Title</h6></label>
+                      <input type="text" value="Blood Request" name="title" class="form-control m-2" disabled></input>
+                    </div>
+                    <div class="input-group">
+                      <label class="form-label m-auto col-4"><h6>Blood Group</h6></label>
+                      <input type="text" value="<%=user.bloodgroup%>" name="bloodgroup" class="form-control m-2" disabled></input>
+                    </div>
+                    <div class="input-group">
+                      <label class="form-label m-auto col-4"><h6>Age</h6></label>
+                      <input type="text" value="<%=moment().diff(user.dob,'years')%>" name="bloodgroup" class="form-control m-2" disabled></input>
+                    </div>
+                    <div class="input-group">
+                      <label class="form-label m-auto col-4"><h6>Description</h6></label>
+                      <input type="text" placeholder="Enter description" name="desc" class="form-control my-3 border-1 border-success"></input>
+                    </div>
+                    <hr>
+                </div>
+                <button type="submit" class="btn btn-success m-2 col-5">Request Blood</button>
+              </div>
+            </form>
+            <form action="/users/updateStatus/<%=user._id%>" method="post">
+              <button type="submit" class="btn btn-danger mb-3 col-5">Cancel Request</button>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</main>

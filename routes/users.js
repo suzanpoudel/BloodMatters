@@ -1,98 +1,49 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
+
 // Load User model
-const User = require('../models/User');
-const { ensureAuthenticated, forwardAuthenticatedUser } = require('../config/auth');
+const User = require("../models/User");
+const {
+  getLogin,
+  getRegister,
+  getDashboard,
+  getProfile,
+  registerUser,
+  updateUserStatus,
+  getRequestBloodForm,
+  userRequestBlood,
+  userGetRequestors,
+} = require("../controllers/user.controller");
+const { ensureAuthenticated } = require("../config/auth");
 
 // Login Page
-router.get('/login', async (req, res) => res.render('login'));
+router.get("/login", getLogin);
 
 // Register Page
-router.get('/register', (req, res) => res.render('register'));
+router.get("/register", getRegister);
 
 // Dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) =>
-  res.render('./user/dashboard', {
-    user: req.user
-  })
-);
+router.get("/dashboard", ensureAuthenticated, getDashboard);
 
-router.get('/profile', ensureAuthenticated, (req, res) =>
-  res.render('./user/profile', {
-    user: req.user
-  })
-);
+//Profile
+router.get("/profile", ensureAuthenticated, getProfile);
 
+//Request blood form
+router.get("/requestblood", ensureAuthenticated, getRequestBloodForm);
 
+//Request blood
+router.post("/requestblood", ensureAuthenticated, userRequestBlood);
+
+//Get Requestors
+router.get("/donateblood/requestors", ensureAuthenticated, userGetRequestors);
+
+//Update Status
+router.post("/updatestatus/:id", ensureAuthenticated, updateUserStatus);
 
 // Register
-router.post('/register', (req, res) => {
-  const { name, email, password, password2,age,gender,address,bloodgroup,phonenumber } = req.body;
-  let errors = [];
-
-  if (!name || !email || !password || !password2 || !bloodgroup || !phonenumber || !address || !age || !gender) {
-    errors.push({ msg: 'Please enter all fields' });
-  }
-
-  if (password != password2) {
-    errors.push({ msg: 'Passwords do not match' });
-  }
-
-  if (password.length < 6) {
-    errors.push({ msg: 'Password must be at least 6 characters!!' });
-  }
-
-  if (errors.length > 0) {
-    res.render('register', {
-      errors,
-      name,
-      email,
-      password,
-      password2,
-      age,gender,address,bloodgroup,phonenumber
-    });
-  } else {
-    User.findOne({ email: email }).then(user => {
-      if (user) {
-        errors.push({ msg: 'Email already exists' });
-        res.render('register', {
-          errors,
-          name,
-          email,
-          password,
-          password2,
-          age,gender,address,bloodgroup,phonenumber
-        });
-      } else {
-        const newUser = new User({
-          name,
-          email,
-          password,
-          age,gender,address,bloodgroup,phonenumber
-        });
-
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => {
-                req.flash(
-                  'success_msg',
-                  'You are now registered and can log in'
-                );
-                res.redirect('/users/login');
-              })
-              .catch(err => console.log(err));
-          });
-        });
-      }
-    });
-  }
-});
+router.post("/register", registerUser);
 
 // Login
 // router.post('/login', (req, res, next) => {
@@ -102,29 +53,32 @@ router.post('/register', (req, res) => {
 //     failureFlash: true
 //   })(req, res, next);
 // });
-router.post('/login',
-  passport.authenticate('local', {
-    failureRedirect: '/users/login',
-    failureFlash: true
-  }),function(req, res){
-    console.log(req.user)
-    if(req.user.isAdmin == false) {
-      res.redirect('/users/dashboard');
-  }else{
-    req.flash('error_msg', 'Access denied');
-    res.redirect('/users/login');
-  };
-})
-
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/users/login",
+    failureFlash: true,
+  }),
+  (req, res) => {
+    console.log(req.user);
+    if (req.user.isAdmin == false) {
+      res.redirect("/users/dashboard");
+    } else {
+      req.flash("error_msg", "Access denied");
+      res.redirect("/users/login");
+    }
+  }
+);
 
 // Logout
-router.get('/logout', (req, res) => {
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    req.flash('success_msg', 'You are logged out');
-    res.redirect('/users/login');
+router.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success_msg", "You are logged out");
+    res.redirect("/users/login");
   });
-  
 });
 
 module.exports = router;

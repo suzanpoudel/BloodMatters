@@ -1,20 +1,6 @@
-<%- include('.././partials/navbar.ejs'); %>
-<%- include('.././partials/sidemenu.ejs'); %>
+<%- include('.././partials/navbarAdmin.ejs'); %>
+<%- include('.././partials/sidemenuAdmin.ejs'); %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-<script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-<script>
-  $(document).ready(function() { 
-$("#edit_btn").click(function() {
-  $(".edit_icon").toggle()
-});
-});
-</script>
 
 <main>
     <section>
@@ -23,60 +9,31 @@ $("#edit_btn").click(function() {
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
-                  <%- include('.././partials/messages.ejs'); %>
                   <img src="/public/Images/user.png" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3"><%=user.name%></h5>
-                  <% if (user.status === 'Idle') { %>
-                    <button type="button" class="btn btn-secondary m-2" 
-                     data-bs-toggle="modal" data-bs-target="#statusModal"><%=user.status%></button>
-                <% } else if (user.status === 'Doner') { %>
-                  <button type="button" class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#statusModal"><%=user.status%></button>
+                  <h5 class="my-3"><%=profile.name%></h5>
+                  <% if (profile.status === 'Idle') { %>
+                    <button type="button" class="btn btn-secondary m-2"><%=profile.status%></button>
+                <% } else if (profile.status === 'Doner') { %>
+                  <button type="button" class="btn btn-warning m-2"><%=profile.status%></button>
                   <% } else { %>
-                    <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#statusModal"><%=user.status%></button>
+                    <button type="button" class="btn btn-danger m-2"><%=profile.status%></button>
                 <% } %>
-                  
-                  <p class="text-muted mb-1"><%=user.email%></p>
-                  <p class="text-muted mb-4"><%=user.address%></p>
-                  <hr>
+                  <p class="text-muted mb-1"><%=profile.email%></p>
+                  <p class="text-muted mb-4"><%=profile.address%></p>
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-danger" id="edit_btn">Edit Profile</button>
-                    <button type="button" class="btn btn-outline-primary ms-1">Change Profile Picture</button>
+                    <% if (profile.status === 'Idle') { %>
+                        <button type="button" class="btn btn-danger col-10"><b>Request Blood</b></button>
+                        <!-- <button type="button" class="btn btn-danger">Donate</button>
+                        <button type="button" class="btn btn-outline-primary ms-1">Request Blood</button> -->
+                    <% } else if (profile.status === 'Doner') { %>
+                        <button type="button" class="btn btn-danger col-10"><b>Request Blood</b></button>
+                      <% } else { %>
+                        <button type="button" class="btn btn-warning col-10">Donate</button>
+                      <% } %>
                   </div>
                 </div>
               </div>
-
-                          <!--Status update Modal -->
-              <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="statusModalLongTitle">Update Status</h5>
-                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <form action="/users/updatestatus/<%=user._id%>" method="post">
-                    <div class="modal-body">
-                      <select class="form-select" name="status" id="status">
-                        <option value="" disabled selected>Select status</option>
-                        <option value="Idle">Idle</option>
-                        <option value="Doner">Doner</option>
-                        <option value="Recipent">Recipent</option>
-                      </select>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </form>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Edit Profile Modal -->
-
-
               <!-- <div class="card mb-4 mb-lg-0">
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">
@@ -112,7 +69,7 @@ $("#edit_btn").click(function() {
                         <p class="mb-0">Id</p>
                       </div>
                       <div class="col-sm-9">
-                        <p class="text-muted mb-0"><%=user._id%></p>
+                        <p class="text-muted mb-0"><%=profile._id%></p>
                       </div>
                       </div>
                       <hr>
@@ -121,7 +78,7 @@ $("#edit_btn").click(function() {
                       <p class="mb-0">Age</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><%=moment().diff(user.dob, 'years')+" years "%></p>
+                      <p class="text-muted mb-0"><%=moment().diff(profile.dob, 'years')+" years "%></p>
 
                     </div>
                   </div>
@@ -131,7 +88,7 @@ $("#edit_btn").click(function() {
                       <p class="mb-0">Gender</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><%=user.gender%></p>
+                      <p class="text-muted mb-0"><%=profile.gender%></p>
                     </div>
                   </div>
                   <hr>
@@ -140,7 +97,7 @@ $("#edit_btn").click(function() {
                       <p class="mb-0">Blood Group</p>
                     </div>
                     <div class="col-sm-9">
-                      <span class="btn btn-danger"><b><%=user.bloodgroup%></b></span>
+                     <span class="btn btn-danger"><b><%=profile.bloodgroup%></b></span>
                     </div>
                   </div>
                   <hr>
@@ -149,7 +106,7 @@ $("#edit_btn").click(function() {
                       <p class="mb-0">Phonenumber</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><%=user.phonenumber%></p>
+                      <p class="text-muted mb-0"><%=profile.phonenumber%></p>
                     </div>
                   </div>
                   <hr>
@@ -158,7 +115,7 @@ $("#edit_btn").click(function() {
                       <p class="mb-0">Date Joined</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><%=user.date%></p>
+                      <p class="text-muted mb-0"><%=profile.date%></p>
                     </div>
                   </div>
                 </div>
@@ -237,4 +194,3 @@ $("#edit_btn").click(function() {
       </section>
   </main>
   <!--Main layout-->
- 
