@@ -28,7 +28,7 @@ router.get("/register", getRegister);
 router.get("/dashboard", ensureAuthenticated, getDashboard);
 
 //Profile
-router.get("/profile", ensureAuthenticated, getProfile);
+router.get("/profile", getProfile);
 
 //Request blood form
 router.get("/requestblood", ensureAuthenticated, getRequestBloodForm);

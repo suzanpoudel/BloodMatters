@@ -28,7 +28,8 @@ exports.getProfile = async (req, res) =>
   res.render("./user/profile", {
     user: req.user,
     moment,
-  });
+  }
+  );
 
 exports.getLogin = async (req, res) => {
   res.render("login");
@@ -73,7 +74,7 @@ exports.userRequestBlood = async (req, res) => {
   const userAge = moment().diff(req.user.dob, "years");
 
   try {
-    const userPosts = await Post.findOne({ creator: req.user._id });
+    const userPosts = await Post.findOne({ creator: req.user._id });  
 
     if (userPosts) {
       req.flash("error_msg", "Sorry! You have already requested for blood");
@@ -117,22 +118,37 @@ exports.userRequestBlood = async (req, res) => {
 
 exports.userGetRequestors = async (req, res) => {
   try {
+    
+    if (req.user.status == "Recipent") {
+      req.flash("error_msg", "Please change status to donate!");
+      return res.redirect("/users/profile");
+    }
+
     const posts = await Post.find({ postType: "request" })
       .sort({ updatedAt: "desc" })
       .populate("creator", "-password -isAdmin -date -_v")
       .exec();
 
+      const compatibilityMatrix = {
+        "O-": ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"],
+        "O+": [ "O+", "A+", "B+" , "AB+"],
+        "A-": ["A-","A+","AB-", "AB+"],
+        "A+": ["A+","AB+"],
+        "B-": ["B-", "B+", "AB-", "AB+"],
+        "B+": ["B+", "AB+"],
+        "AB-": ["AB-","AB+"],
+        "AB+": ["AB+"]
+      };  
+      
+      const userBloodGroup = req.user.bloodgroup
+      compatibleBloodGroup = compatibilityMatrix[userBloodGroup]
+
     const filteredPosts = posts.filter(
       (post) =>
         post.creator.status == "Recipent" &&
-        post.creator.bloodgroup == req.user.bloodgroup &&
+        compatibleBloodGroup.includes(post.creator.bloodgroup) &&
         post.creator._id != req.user._id
     );
-
-    if (req.user.status == "Recipent") {
-      req.flash("error_msg", "Please change status to donate!");
-      return res.redirect("/users/dashboard");
-    }
 
     res.render("./user/requestors", {
       user: req.user,
@@ -177,6 +193,12 @@ exports.registerUser = async (req, res) => {
 
   if (password != password2) {
     errors.push({ msg: "Passwords do not match" });
+  }
+
+  let dob1 = new Date(dob)
+ 
+  if(dob1 >= Date.now()){
+    errors.push({msg:"Invalid Date of Birth!"})
   }
 
   const phonePattern = /^(01\d{7}|98\d{8})$/;

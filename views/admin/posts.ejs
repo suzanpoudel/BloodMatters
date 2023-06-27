@@ -35,14 +35,14 @@
                 <% } %>
                 <div class="card-footer">
                     <p class="card-text my-3"><small class="text-muted">Posted by: <b class="text-success"><%=Post.creator.name%></b></small></p>
-                    <button type="button" class="btn btn-primary edit_btn" data-bs-toggle="modal" data-bs-target="#editPostModal">Edit <i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal">Delete <i class="fas fa-trash"></i></button>
+                    <button type="button" class="btn btn-primary edit_btn" data-bs-toggle="modal" data-bs-target="#editPostModal<%=Post._id%>">Edit <i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal<%=Post._id%>">Delete <i class="fas fa-trash"></i></button>
                 </div>
               </div>
               <hr class="border-3">
     
             <!-- Edit Post Modal -->
-            <div class="modal fade edit_modal" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
+            <div class="modal fade edit_modal" id="editPostModal<%=Post._id%>" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -55,6 +55,7 @@
                         <form action="/admin/post/edit/<%=Post._id%>" method="POST">
                             <div class="col-10 m-auto">
                                 <div class="card border-1 border-dark">
+                                  <p><%=Post._id%></p>
                                   <div class="card-body">
                                     <div class="form-group ">
                                         <input type="text" placeholder="Enter Title" value="<%=Post.title%>" name="title" class="form-control m-2"></input>
@@ -75,7 +76,7 @@
 
             <!-- Post Delete Modal -->
            
-            <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+            <div class="modal fade" id="deletePostModal<%=Post._id%>" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

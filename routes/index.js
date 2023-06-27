@@ -14,7 +14,7 @@ const {
 } = require("../config/auth");
 
 // Welcome Page
-router.get("/", ensureAuthenticated, welcome);
+router.get("/",welcome);
 
 router.get("/errorpage", ensureAuthenticated, getErrorPage);
 
