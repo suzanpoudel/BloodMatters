@@ -29,3 +29,4 @@ exports.adminGetUserById = async (req, res) => {
     res.redirect("/userslist");
   }
 };
+

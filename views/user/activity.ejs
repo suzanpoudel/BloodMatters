@@ -1,0 +1,135 @@
+<%- include('.././partials/navbar.ejs'); %>
+<%-include('.././partials/sidemenu.ejs'); %>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+  crossorigin="anonymous"
+/>
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      $(document).ready(function(){
+          $("#search").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#datatable tbody tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+              });
+          });
+      });
+  </script>
+<main>
+  <section>
+    <div class="container py-2 mt-5">
+      
+      <% if(activities.length == 0) { %>
+        <p class="lead mt-5">No activities till now</p>
+        <% } else { %>
+          <div class="form-outline mt-5">
+            <input type="text" id="search" class="form-control" placeholder="Search here" aria-label="Search" />
+          </div>
+          <%- include('.././partials/messages.ejs'); %>
+            <table class="table table-hover mt-5" id="datatable"> 
+              <thead class="bg-dark">
+                <tr>
+                  <th scope="col" id="user_col" class="text-light">User</th>
+                  <th scope="col" class="text-light">Activity Type</th>
+                  <th scope="col" class="text-light">Status</th>
+                  <th scope="col" class="text-light">Date</th>
+                  <th scope="col" class="text-light ">Action</th>
+                </tr>
+              </thead>
+              <% activities.forEach(Activity => { %>
+                <% if (Activity.type == 'Request') { %>
+                  <tbody id="tab-id">
+                    <tr>
+                      <td><a href="/profile/<%=Activity.sender._id%>" style="text-decoration: none;"><b class="text-dark"><%=Activity.sender.name%> (Me)<b></a></td>
+                        <td>Requested Blood</td>
+                        <td><%=Activity.status%></td>
+                        <td><%=Activity.updatedAt%></td>
+                        <% if (Activity.status == 'Pending') { %>
+                          <form action="/users/updateStatus/<%=user._id%>" method="post">
+                            <td><button type="submit" class="btn btn-danger">Cancel Request</button></td>
+                          </form>
+                          <% } %>
+                      </tr>
+                      </tbody>
+                <% } else { %>
+                   <% if(Activity.sender._id == user.id) { %>
+                  <!-- <script>
+                    $(document).ready(function() {
+                      $('table th').eq(0).text( 'Requestor' );
+                    })
+                  </script> -->
+                  <tbody id="tab-id">
+                    <tr>
+                      <td><a href="/profile/<%=Activity.receiver._id%>" style="text-decoration: none;"><b class="text-dark"><%=Activity.receiver.name%><b></a></td>
+                        <td>Donate blood</td>
+                <% if (Activity.status == 'Completed' || Activity.status == 'Cancelled' ) { %>
+                    <td><%=Activity.status%></td>
+                    <td><%=Activity.updatedAt%></td>
+                <% } else { %>   
+                      <td><%=Activity.status%></td>
+                      <td><%=Activity.updatedAt%></td>
+                      <form action="/users/request/cancel/<%=Activity._id%>" method="post">
+                        <td><button type="submit" class="btn btn-danger">Cancel Donation</button></td>
+                      </form>
+                      <% } %> 
+                    </tr>
+                  </tbody>
+              <% } else { %>
+                <tbody id="tab-id">
+                  <tr>
+                    <td><a href="/profile/<%=Activity.sender._id%>" style="text-decoration: none;"><b class="text-dark"><%=Activity.sender.name%><b></a></td>
+                      <td>Blood Request</td>
+                <% if (Activity.status == 'Pending' ) { %>
+                      <td><%=Activity.status%></td>
+                      <td><%=Activity.updatedAt%></td>
+                      <td>
+                      <div class="input-group"> 
+                        <form action="/users/request/confirm/<%=Activity._id%>" method="post">
+                          <button type="submit" class="btn btn-success">Confirm</button> 
+                        </form>
+                        <form action="/users/request/decline/<%=Activity._id%>" method="post">
+                          <button type="submit" class="btn btn-danger ms-3">Decline</button> 
+                        </form>
+                      </div>
+                      </td>
+                <% } else if(Activity.status == 'Accepted') { %>
+                  
+                      <td><%=Activity.status%></td>
+                      <td><%=Activity.updatedAt%></td>
+                      <td>
+                      <form action="/users/request/complete/<%=Activity._id%>" method="post">
+                        <button type="submit" class="btn btn-success">Set to Completed</button> 
+                      </form>
+                      </td>
+
+               <% } else if(Activity.status == 'Declined'){ %>
+                
+                    <td><%=Activity.status%></td>
+                    <td><%=Activity.updatedAt%></td>
+                    <td>
+                      <form action="/users/request/cancel/<%=Activity._id%>" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button> 
+                      </form>
+                    </td>
+               <% } else { %>
+                    <td><%=Activity.status%></td>
+                    <td><%=Activity.updatedAt%></td>
+               <% }%>
+              </tr>
+            </tbody>
+              <% } %>
+              <% } %> 
+        <% }) %>
+      </table>
+    <% } %>
+    </div>
+  </section>
+</main>

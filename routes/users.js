@@ -15,32 +15,38 @@ const {
   getRequestBloodForm,
   userRequestBlood,
   userGetRequestors,
+  userDonateBlood,
+  userGetActivity,
+  declineRequest,
+  cancelRequest,
+  confirmRequest,
+  completeRequest,
 } = require("../controllers/user.controller");
 const { ensureAuthenticated } = require("../config/auth");
 
 // Login Page
 router.get("/login", getLogin);
-
 // Register Page
 router.get("/register", getRegister);
-
 // Dashboard
 router.get("/dashboard", ensureAuthenticated, getDashboard);
-
 //Profile
-router.get("/profile", getProfile);
-
+router.get("/profile",ensureAuthenticated, getProfile);
 //Request blood form
 router.get("/requestblood", ensureAuthenticated, getRequestBloodForm);
-
 //Request blood
 router.post("/requestblood", ensureAuthenticated, userRequestBlood);
-
 //Get Requestors
 router.get("/donateblood/requestors", ensureAuthenticated, userGetRequestors);
-
 //Update Status
 router.post("/updatestatus/:id", ensureAuthenticated, updateUserStatus);
+router.post("/donateblood/:id",ensureAuthenticated,userDonateBlood)
+router.get("/notifications",ensureAuthenticated, userGetActivity)
+router.post("/request/confirm/:id",ensureAuthenticated, confirmRequest)
+router.post("/request/decline/:id",ensureAuthenticated, declineRequest)
+router.post("/request/cancel/:id",ensureAuthenticated, cancelRequest)
+router.post("/request/complete/:id",ensureAuthenticated, completeRequest)
+
 
 // Register
 router.post("/register", registerUser);

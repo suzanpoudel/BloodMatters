@@ -5,6 +5,7 @@ const passport = require("passport");
 const moment = require("moment");
 
 const { User, Post } = require("../models/User");
+const Activity = require("../models/Activity");
 
 exports.getDashboard = async (req, res) => {
   try {
@@ -50,7 +51,14 @@ exports.updateUserStatus = async (req, res) => {
     }
     await user.save();
 
-    const posts = await Post.deleteMany({ creator: req.user._id });
+    const post = await Post.findOneAndDelete({ creator: req.user._id });
+
+    const activity = await Activity.findOneAndUpdate(
+      {postId:post._id},
+      {status : 'Cancelled'},
+      {new : true}
+      )
+      
     req.flash(
       "success_msg",
       "Status updated successfully! All requests have been cleared!"
@@ -100,12 +108,22 @@ exports.userRequestBlood = async (req, res) => {
       imageUrl: null,
     });
 
+    await post.save();
+
+    const activity = new Activity({
+      sender : req.user.id,
+      receiver : null,
+      type : 'Request',
+      postId : post._id
+    }) 
+
+    await activity.save()
+
     await User.findOneAndUpdate(
       { _id: req.user._id },
       { status: "Recipent" },
       { new: true }
     );
-    await post.save();
 
     req.flash("success_msg", "Blood request successful!");
     res.redirect("/users/requestblood");
@@ -124,10 +142,32 @@ exports.userGetRequestors = async (req, res) => {
       return res.redirect("/users/profile");
     }
 
-    const posts = await Post.find({ postType: "request" })
+
+    // console.log(interactedUsersId)
+    //UserModel.aggregate([ $match: { id: { $nin: <my_arr>}}])
+    const posts = await Post.find({ postType: "request" }) 
       .sort({ updatedAt: "desc" })
       .populate("creator", "-password -isAdmin -date -_v")
       .exec();
+
+      let postCreatorsId = []
+      let activeReqCreatorId = []
+
+      posts.forEach(post => postCreatorsId.push(post.creator._id))
+      console.log('Post creators list',postCreatorsId);
+
+      const activeRequests = await Activity.find(
+        {
+          sender : req.user.id,
+          receiver: {$in : postCreatorsId},
+          status : {$in : ['Pending','Accepted','Declined']}
+        })
+        .populate('receiver').select("receiver").exec()
+
+      activeRequests.forEach(request => activeReqCreatorId.push(request.receiver._id.toString()))
+
+      activeReqCreatorId = [... new Set(activeReqCreatorId)]
+      console.log('Active post creators list',activeReqCreatorId);
 
       const compatibilityMatrix = {
         "O-": ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"],
@@ -142,25 +182,175 @@ exports.userGetRequestors = async (req, res) => {
       
       const userBloodGroup = req.user.bloodgroup
       compatibleBloodGroup = compatibilityMatrix[userBloodGroup]
-
+      
     const filteredPosts = posts.filter(
-      (post) =>
+      (post) => 
         post.creator.status == "Recipent" &&
         compatibleBloodGroup.includes(post.creator.bloodgroup) &&
-        post.creator._id != req.user._id
-    );
+        !activeReqCreatorId.includes(post.creator._id.toString())
+      );
+
 
     res.render("./user/requestors", {
+      activeReq : activeReqCreatorId,
       user: req.user,
       posts: filteredPosts,
       moment,
     });
   } catch (err) {
     console.log(err);
-    res.flash("error_msg", "Something went wrong");
+    req.flash("error_msg", "Something went wrong");
     res.redirect("/users/dashboard");
   }
 };
+
+exports.userDonateBlood = async(req,res)=>{
+ 
+  try{
+    const senderId = req.user.id
+    const postId = req.params.id
+    const post = await Post.findOne({_id:postId}).populate("creator", "-password -isAdmin -date -__v").exec()
+    const receiverId = post.creator._id
+
+    //check if notification exists for that sender
+    const donationRequest = await Activity.find({sender : senderId, receiver:receiverId})
+    let l = ['Completed','Cancelled']
+    const pendingRequest = donationRequest.filter(donation => !(l.includes(donation.status)) )
+    
+    if(pendingRequest.length != 0){
+      req.flash('error_msg',"Donation request already sent!")
+      return res.redirect('/users/donateblood/requestors')
+    }
+
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { status: "Doner" },
+      { new: true }
+    );
+    //save notification
+    const activity = new Activity({
+      sender : senderId,
+      receiver : receiverId,
+      type : 'Donate'
+    })
+    await activity.save()
+
+    if(!activity){
+      req.flash('error_msg',"Something went wrong!")
+      return res.redirect('/users/donateblood')
+    }
+    req.flash('success_msg',"Notification successfully sent!")
+    res.redirect('/users/notifications')
+
+  }catch(err){
+    console.log(err)
+    req.flash('error_msg',"Internal Server Error!")
+    res.redirect('/users/donateblood/requestors')
+  }
+}
+
+exports.userGetActivity = async(req,res)=>{
+
+  try {
+      const activities = await Activity.find({
+        $or : [
+          {
+            'receiver' : req.user.id
+          },
+          {
+            'sender':req.user.id
+          }
+
+        ]
+      }).sort({ updatedAt: "desc" }).populate("sender").populate("receiver").exec()
+      res.render('./user/activity',{
+        activities,
+        user: req.user,
+        moment
+      })
+
+  } catch (err) {
+    console.log(err)
+    req.flash('error_msg',"Internal Server Error!")
+    res.redirect('/users/dashboard')
+  }
+}
+
+exports.confirmRequest = async(req,res)=>{
+  try {
+    const activityId = req.params.id
+    await Activity.findOneAndUpdate(
+      { _id: activityId },
+      { status: "Accepted" },
+      { new: true }
+    );
+    req.flash('success_msg',"Request accepted!")
+    res.redirect('/users/notifications')
+  } catch (err) {
+    console.log(err)
+    req.flash('error_msg',"Internal Server Error!")
+    res.redirect('/users/notifications')
+  }
+}
+
+exports.declineRequest = async(req,res)=>{
+  try {
+    const activityId = req.params.id
+    await Activity.findOneAndUpdate(
+      { _id: activityId },
+      { status: "Declined" },
+      { new: true }
+    );
+    req.flash('success_msg',"Request declined!")
+    res.redirect('/users/notifications')
+  } catch (err) {
+    console.log(err)
+    req.flash('error_msg',"Internal Server Error!")
+    res.redirect('/users/notifications')
+  }
+}
+
+exports.cancelRequest = async(req,res)=>{
+  try {
+    const activityId = req.params.id
+    await Activity.findOneAndUpdate(
+      { _id: activityId },
+      { status: "Cancelled" },
+      { new: true }
+    );
+    req.flash('success_msg',"Donation cancelled!")
+    res.redirect('/users/notifications')
+  } catch (err) {
+    console.log(err)
+    req.flash('error_msg',"Internal Server Error!")
+    res.redirect('/users/notifications')
+  }
+}
+
+exports.completeRequest = async(req,res)=>{
+  try {
+    const activityId = req.params.id
+    await Activity.findOneAndUpdate(
+      { _id: activityId },
+      { status: "Completed" },
+      { new: true }
+    );
+    await Post.findOneAndDelete({creator : req.user.id})
+    req.flash('success_msg',"Blood request cleared")
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { status: "Idle" },
+      { new: true }
+    )
+    req.flash('success_msg',"Status set to Idle")
+    req.flash('success_msg',"Donation process completed!")
+    res.redirect('/users/notifications')
+  } catch (err) {
+    console.log(err)
+    req.flash('error_msg',"Internal Server Error!")
+    res.redirect('/users/notifications')
+  }
+}
 
 exports.registerUser = async (req, res) => {
   const {
