@@ -23,6 +23,9 @@ const {
   adminGetRequestors,
   adminGet_BB_Form,
   adminCreate_BB_Post,
+  AdminGet_BB_Post,
+  adminEdit_BB_Post,
+  adminDelete_BB_Post,
 } = require("../../controllers/admin/admin.controller");
 
 // Login Page
@@ -55,6 +58,10 @@ router.get("/post/requestors", ensureAdminAuthenticated, adminGetRequestors);
 //Blood Bank Centers
 router.get("/bb-form",ensureAdminAuthenticated, adminGet_BB_Form)
 router.post("/bb-form",ensureAdminAuthenticated, adminCreate_BB_Post)
+router.get("/bloodbanks",ensureAdminAuthenticated, AdminGet_BB_Post)
+router.post("/bloodbank/edit/:id",ensureAdminAuthenticated,adminEdit_BB_Post)
+router.post("/bloodbank/delete/:id",ensureAdminAuthenticated,adminDelete_BB_Post)
+
 
 // Login
 // router.post('/login', (req, res, next) => {

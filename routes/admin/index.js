@@ -10,6 +10,7 @@ const User = require("../../models/User");
 const {
   adminGetUsers,
   adminGetUserById,
+  adminDeleteUser,
 } = require("../../controllers/admin/index.controller");
 // Welcome Page
 // router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
@@ -17,5 +18,7 @@ const {
 router.get("/userslist", ensureAdminAuthenticated, adminGetUsers);
 
 router.get("/userprofile/:id", ensureAdminAuthenticated, adminGetUserById);
+
+router.post("/user/delete/:id",ensureAdminAuthenticated,adminDeleteUser)
 
 module.exports = router;

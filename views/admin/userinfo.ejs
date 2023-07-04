@@ -22,15 +22,7 @@
                   <p class="text-muted mb-1"><%=profile.email%></p>
                   <p class="text-muted mb-4"><%=profile.address%></p>
                   <div class="d-flex justify-content-center mb-2">
-                    <% if (profile.status === 'Idle') { %>
-                        <button type="button" class="btn btn-danger col-10"><b>Request Blood</b></button>
-                        <!-- <button type="button" class="btn btn-danger">Donate</button>
-                        <button type="button" class="btn btn-outline-primary ms-1">Request Blood</button> -->
-                    <% } else if (profile.status === 'Doner') { %>
-                        <button type="button" class="btn btn-danger col-10"><b>Request Blood</b></button>
-                      <% } else { %>
-                        <button type="button" class="btn btn-warning col-10">Donate</button>
-                      <% } %>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userDeleteModal<%=profile._id%>">Delete Account<i class="fas fa-trash ms-2"></i></button>
                   </div>
                 </div>
               </div>
@@ -191,6 +183,34 @@
             </div>
           </div>
         </div>
+
+
+        <!-- Account Delete Modal -->
+           
+       <div class="modal fade" id="userDeleteModal<%=profile._id%>" tabindex="-1" role="dialog" aria-labelledby="userDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="userDeleteModalLabel">Delete User Account</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/user/delete/<%=profile._id%>" method="post">
+                    <div class="col-10 m-auto">
+                        <div class="card">
+                          <div class="card-body align-self-center">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Delete Account</button>
+                          </div>
+                        </div>
+                    </div>
+                  </form>
+            </div>
+        </div>
+        </div>
+    </div>
       </section>
   </main>
   <!--Main layout-->

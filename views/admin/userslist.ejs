@@ -6,39 +6,86 @@ include('.././partials/sidemenuAdmin.ejs'); %>
   integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
   crossorigin="anonymous"
 />
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+<script>
+  $(document).ready(function(){
+      $("#search").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#datatable tbody tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
+      });
+  });
+</script>
+
 <main>
   <section style="background-color: #eee">
     <div class="container py-2 mt-5">
       <div class="form-outline mt-5">
-        <input type="search" id="form1" class="form-control" placeholder="Search here" aria-label="Search" />
+        <input type="search" id="search" class="form-control" placeholder="Search here" aria-label="Search" />
       </div>
       <%- include('.././partials/messages.ejs'); %>
-      <table class="table table-hover mt-5"">
+      <table class="table table-hover mt-5" id="datatable">
         <thead class="bg-dark">
           <tr>
             <th scope="col" class="text-light">Name</th>
             <th scope="col" class="text-light">Blood Group</th>
-            <th scope="col" class="text-light">Address</th>
+            <th scope="col" class="text-light col-3">Address</th>
             <th scope="col" class="text-light">Status</th>
+            <th scope="col" class="text-light">Action</th>
           </tr>
         </thead>
         <% users.forEach(User => { %>
         <tbody>
           <tr>
             <td><a href="/admin/userprofile/<%=User._id%>" style="text-decoration: none;"><b class="text-dark"><%=User.name%><b></a></td>
-            <td><%=User.bloodgroup%></td>
+            <td><button class="btn btn-dark m-0 py-0"><%=User.bloodgroup%></button></td>
             <td><%=User.address%></td>
             <% if (User.status === 'Idle') { %>
-              <td><button type="button" class="btn btn-secondary m-0"><%=User.status%></button></td>
+              <td><button type="button" class="btn btn-secondary m-0 py-0"><%=User.status%></button></td>
           <% } else if (User.status === 'Doner') { %>
-            <td><button type="button" class="btn btn-warning m-0"><%=User.status%></button></td>
+            <td><button type="button" class="btn btn-warning m-0 py-0"><%=User.status%></button></td>
             <% } else { %>
-              <td><button type="button" class="btn btn-danger m-0"><%=User.status%></button></td>
+              <td><button type="button" class="btn btn-danger m-0 py-0"><%=User.status%></button></td>
           <% } %>
+          <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userDeleteModal<%=User._id%>"><i class="fas fa-trash"></i></button></td>
           </tr>
         </tbody>
-        <% }) %>
+      <!-- Account Delete Modal -->
+      
+      <div class="modal fade" id="userDeleteModal<%=User._id%>" tabindex="-1" role="dialog" aria-labelledby="userDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="userDeleteModalLabel">Delete User Account</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/admin/user/delete/<%=User._id%>" method="post">
+                    <div class="col-10 m-auto">
+                        <div class="card">
+                          <div class="card-body align-self-center">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Delete Account</button>
+                          </div>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
       </table>
-    </div>
-  </section>
-</main>
+        </div>
+      </section>
+    </main>
+    

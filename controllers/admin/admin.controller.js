@@ -187,54 +187,65 @@ exports.adminCreate_BB_Post = async (req, res) => {
   }
 };
 
-exports.adminGet_BB_Post = async (req, res) => {
+//Blood banks
+exports.AdminGet_BB_Post = async (req, res) => {
   try {
-    const posts = await Post.find({ postType: "info" })
-      .sort({ updatedAt: "desc" })
-      .populate("creator", "-password -isAdmin -date -_v")
+    const banks = await BloodBank.find({})
+      .sort({ name : 'asc'})
       .exec();
-    res.render("./admin/posts", {
+    res.render("./admin/bloodbanks", {
       user: req.user,
-      posts,
+      banks,
       moment,
     });
   } catch (err) {
     console.log(err);
     res.flash("error_msg", "Something went wrong");
-    res.redirect("/admin/post/info");
+    res.redirect("/admin/dashboard");
   }
 };
 
 exports.adminEdit_BB_Post = async (req, res) => {
-  try {
-    const postId = req.params.id;
-    const post = await Post.findOne({ _id: postId });
-    if (!post) {
-      req.flash("error_msg", "Something went wrong!");
-      res.redirect("/admin/post/info");
+
+  const bankPostId = req.params.id
+  const { name, address, contact, o_pos,o_neg,a_pos,a_neg,b_pos,b_neg,ab_pos,ab_neg } = req.body;
+
+    try {
+        const bankPost = await BloodBank.findOneAndUpdate({
+          name: name,
+          address: address,
+          contact: contact,
+          bloodgroup : [
+            {type : "o_pos",quantity:o_pos},
+            {type : "o_neg",quantity:o_neg},
+            {type : "a_pos",quantity:a_pos},
+            {type : "a_neg",quantity:a_neg},
+            {type : "b_pos",quantity:b_pos},
+            {type : "b_neg",quantity:b_neg},
+            {type : "ab_pos",quantity:ab_pos},
+            {type : "ab_neg",quantity:ab_neg},
+          ]
+        });
+        await bankPost.save();
+        req.flash("success_msg", "Blood bank content updated successfully!!");
+        res.redirect("/admin/bloodbanks");
+    } catch (err) {
+      console.log(err);
+      req.flash("error_msg", "Something went wrong");
+      res.redirect("/admin/bloodbanks");
     }
-    post.title = req.body.title;
-    post.body = req.body.body;
-    await post.save();
-    req.flash("success_msg", "Post successfully updated");
-    res.redirect("/admin/post/info");
-  } catch (err) {
-    console.log(err);
-    req.flash("error_msg", "Something went wrong");
-    res.redirect("/admin/post/info");
   }
-};
 
 exports.adminDelete_BB_Post = async (req, res) => {
   try {
-    const postId = req.params.id;
-    await Post.findOneAndDelete({ _id: postId });
-    req.flash("success_msg", "Post successfully deleted!");
-    res.redirect("/admin/post/info");
+    const bankPostId = req.params.id;
+    await BloodBank.findOneAndDelete({ _id: bankPostId });
+    req.flash("success_msg", "Blood Bank successfully deleted!");
+    res.redirect("/admin/bloodbanks");
   } catch (err) {
     console.log(err);
     req.flash("error_msg", "Something went wrong!");
-    res.redirect("/admin/post/info");
+    res.redirect("/admin/bloodbanks");
   }
 };
 
