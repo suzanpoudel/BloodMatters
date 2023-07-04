@@ -1,0 +1,76 @@
+<%- include('.././partials/navbar.ejs'); %>
+<%- include('.././partials/sidemenu.ejs'); %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script>
+$(document).ready(function () {
+    $("#search").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#bank .card").filter(function () {
+            // change here to the parent as if you hide card only card will hide but col will still take the place
+            $(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+     });
+ });
+</script>
+<main>
+    <section>
+        <div class="px-4 py-5 my-5">
+        <div class="form-outline mb-3">
+            <input type="text" id="search" class="form-control" placeholder="Search here" aria-label="Search" />
+          </div>
+          <div class="container d-flex flex-wrap justify-content-sm-start">
+            <% banks.forEach(bank => { %>
+                            <div class="card col-4 mb-2" id="bank">
+                                <div class="card-body">
+                                    <h5 class="card-title text-danger"><b><%=bank.name%></b></h5>
+                                    <p class="card-text"><%=bank.address%></p>
+                                    <p class="card-text lead"><%=bank.contact%></p>
+                                </div>
+                                <div class="m-3">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bloodcountModal<%=bank._id%>">
+                                        Check Blood Quantity
+                                    </button>
+                                </div>
+                        </div>
+                    
+                    <!-- Blood group modal -->
+                        <div class="modal fade" id="bloodcountModal<%=bank._id%>" tabindex="-1" role="dialog" aria-labelledby="bloodcountModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="bloodcountModalLabel"><%=bank.name%></h5>
+                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-header text-bg-danger text-light">
+                                          Blood Quantity
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <div class="input-group d-flex justify-content-evenly">
+                                                <li class="list-group-item">O+ : <b><%=bank.bloodgroup[0].quantity%></b></li>
+                                                <li class="list-group-item">A+ : <b><%=bank.bloodgroup[2].quantity%></b></li>
+                                                <li class="list-group-item">B+ : <b><%=bank.bloodgroup[4].quantity%></b></li>
+                                                <li class="list-group-item">AB+ : <b><%=bank.bloodgroup[6].quantity%></b></li>
+                                            </div>
+                                            <div class="input-group justify-content-evenly">
+                                                <li class="list-group-item">O- : <b><%=bank.bloodgroup[1].quantity%></b></li>
+                                                <li class="list-group-item">A- : <b><%=bank.bloodgroup[3].quantity%></b></li>
+                                                <li class="list-group-item">B- : <b><%=bank.bloodgroup[5].quantity%></b></li>
+                                                <li class="list-group-item">AB- : <b><%=bank.bloodgroup[7].quantity%></b></li>
+                                            </div>
+                                        </ul>
+                                      </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+            <% }) %>
+        </div>
+
+        </div>
+      </section>
+  </main>
+  <!--Main layout-->

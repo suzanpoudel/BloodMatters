@@ -21,6 +21,7 @@ const {
   cancelRequest,
   confirmRequest,
   completeRequest,
+  getBloodBank,
 } = require("../controllers/user.controller");
 const { ensureAuthenticated } = require("../config/auth");
 
@@ -40,6 +41,8 @@ router.post("/requestblood", ensureAuthenticated, userRequestBlood);
 router.get("/donateblood/requestors", ensureAuthenticated, userGetRequestors);
 //Update Status
 router.post("/updatestatus/:id", ensureAuthenticated, updateUserStatus);
+
+//Donate/Request
 router.post("/donateblood/:id",ensureAuthenticated,userDonateBlood)
 router.get("/notifications",ensureAuthenticated, userGetActivity)
 router.post("/request/confirm/:id",ensureAuthenticated, confirmRequest)
@@ -47,6 +50,9 @@ router.post("/request/decline/:id",ensureAuthenticated, declineRequest)
 router.post("/request/cancel/:id",ensureAuthenticated, cancelRequest)
 router.post("/request/complete/:id",ensureAuthenticated, completeRequest)
 
+//Blood bank
+router.get("/bloodbanks",ensureAuthenticated, getBloodBank)
+ 
 
 // Register
 router.post("/register", registerUser);

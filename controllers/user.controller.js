@@ -6,6 +6,7 @@ const moment = require("moment");
 
 const { User, Post } = require("../models/User");
 const Activity = require("../models/Activity");
+const BloodBank = require("../models/Bloodbank");
 
 exports.getDashboard = async (req, res) => {
   try {
@@ -351,6 +352,25 @@ exports.completeRequest = async(req,res)=>{
     res.redirect('/users/notifications')
   }
 }
+
+//Blood banks
+exports.getBloodBank = async (req, res) => {
+  try {
+    const banks = await BloodBank.find({})
+      .sort({ name : 'asc'})
+      .exec();
+    res.render("./user/bloodbanks", {
+      user: req.user,
+      banks,
+      moment,
+    });
+  } catch (err) {
+    console.log(err);
+    res.flash("error_msg", "Something went wrong");
+    res.redirect("/errorpage");
+  }
+};
+
 
 exports.registerUser = async (req, res) => {
   const {
