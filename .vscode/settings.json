@@ -1,3 +1,4 @@
 {
     "css.completion.triggerPropertyValueCompletion": true,
+    "html.validate.scripts": false
 }

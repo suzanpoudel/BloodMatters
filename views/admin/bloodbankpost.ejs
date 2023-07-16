@@ -35,27 +35,27 @@ include('.././partials/sidemenuAdmin.ejs'); %>
                     <input type="text" placeholder="Enter Contact" name="contact" class="form-control m-2"></input>
                     <div class="input-group">
                         <label class="form-label m-auto">Total O+ :</label>
-                        <input type="number" name="o_pos" class="form-control m-2"></input> 
+                        <input type="number" name="o_pos"  min="0" class="form-control m-2"></input> 
                         <label class="form-label m-auto">Total O- :</label>
-                        <input type="number" name="o_neg" class="form-control m-2"></input>
+                        <input type="number" name="o_neg" min="0" class="form-control m-2"></input>
                     </div>
                     <div class="input-group">
                         <label class="form-label m-auto">Total A+ :</label>
-                        <input type="number" name="a_pos" class="form-control m-2"></input> 
+                        <input type="number" name="a_pos" min="0" class="form-control m-2"></input> 
                         <label class="form-label m-auto">Total A- :</label>
-                        <input type="number" name="a_neg" class="form-control m-2"></input>
+                        <input type="number" name="a_neg" min="0" class="form-control m-2"></input>
                     </div>
                     <div class="input-group">
                         <label class="form-label m-auto">Total B+ :</label>
-                        <input type="number" name="b_pos" class="form-control m-2"></input> 
+                        <input type="number" name="b_pos" min="0" class="form-control m-2"></input> 
                         <label class="form-label m-auto">Total B- :</label>
-                        <input type="number" name="b_neg" class="form-control m-2"></input>
+                        <input type="number" name="b_neg" min="0" class="form-control m-2"></input>
                     </div>
                     <div class="input-group">
                         <label class="form-label m-auto">Total AB+ :</label>
-                        <input type="number" name="ab_pos" class="form-control m-2"></input> 
+                        <input type="number" name="ab_pos" min="0" class="form-control m-2"></input> 
                         <label class="form-label m-auto">Total AB- :</label>
-                        <input type="number" name="ab_neg" class="form-control m-2"></input>
+                        <input type="number" name="ab_neg" min="0" class="form-control m-2"></input>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success m-2 col-5">Upload</button>

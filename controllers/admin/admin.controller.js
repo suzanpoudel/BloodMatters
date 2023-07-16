@@ -5,12 +5,104 @@ const cloudinary = require("cloudinary");
 require("../../handlers/cloudinary");
 
 const { User, Post } = require("../../models/User");
+const Activity = require('../../models/Activity')
 const BloodBank = require("../../models/Bloodbank")
 
-exports.getAdminDashboard = async (req, res) =>
-  res.render("./admin/dashboard", {
-    user: req.user,
-  });
+exports.getAdminDashboard = async (req, res) => {
+
+  try {
+    
+    const userCount = await User.find({isAdmin:false}).count().exec()
+    const postCount = await Post.find({}).count().exec()
+    const activityCount = await Activity.find({}).count().exec()
+    const bloodBankCount = await BloodBank.find({}).count().exec()
+    const bloodGrpCount = []
+    const bloodGrpLabels = []
+    const activityStatusCount = []
+    const activityStatusLabels = []
+  
+    //get count of each blood groups
+    const blood_grp_count_result = await User.aggregate([
+      {
+          $group: {
+              _id: {
+                  bloodgroup: '$bloodgroup'
+              },
+              count: {
+                  $sum: 1
+              }
+          }
+      },
+      {
+        $project: {
+            bloodgroup: '$bloodgroup.bloodgroup',
+            count: '$count'
+        }
+    }
+  ]);
+
+  //get count of activity status
+  const activity_status_count_result = await Activity.aggregate([
+    {
+        $group: {
+            _id: {
+                status: '$status'
+            },
+            count: {
+                $sum: 1
+            }
+        }
+    },
+    {
+      $project: {
+          status: '$status.status',
+          count: '$count'
+      }
+  }
+]);
+
+
+//sort with specific order
+// const sortedResult =  result.sort((a, b) => {
+  //   return bloodGroupsOrder.indexOf(a.bloodgroup) - bloodGroupsOrder.indexOf(b.bloodgroup);
+  // });
+
+  //push data to respective array
+  blood_grp_count_result.forEach(item => {
+    bloodGrpCount.push(item.count)
+    bloodGrpLabels.push(item._id.bloodgroup)
+  })
+
+  activity_status_count_result.forEach(item => {
+    activityStatusCount.push(item.count)
+    activityStatusLabels.push(item._id.status)
+  })
+  
+  // console.log(blood_grp_count_result);
+  // console.log(bloodGrpCount);
+  // console.log(bloodGrpLabels);
+  
+  console.log(activity_status_count_result);
+
+
+    res.render("./admin/dashboard", {
+      userCount,
+      postCount,
+      activityCount,
+      bloodBankCount,
+      bloodGrpCount,
+      bloodGrpLabels,
+      activityStatusCount,
+      activityStatusLabels,
+      user: req.user,
+    });
+  } catch (err) {
+    console.log(err)
+    res.send('Something went wrong')
+  }
+}
+
+
 
 exports.getAdminProfile = async (req, res) =>
   res.render("./admin/profile", {

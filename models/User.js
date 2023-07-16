@@ -31,6 +31,7 @@ const UserSchema = new mongoose.Schema({
   },
   bloodgroup: {
     type: String,
+    enum: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'],
     required: true,
   },
   isAdmin: {

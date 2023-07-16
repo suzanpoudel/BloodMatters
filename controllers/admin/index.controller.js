@@ -32,11 +32,16 @@ exports.adminGetUserById = async (req, res) => {
 
 exports.adminDeleteUser = async (req, res) => {
   try {
-    await User.findOneAndDelete({ isAdmin: false });
+    const userId = req.params.id
+    const user = await User.findOneAndDelete({ isAdmin: false, _id: userId });
+    if(!user){
+      req.flash('error_msg',"User not found!")
+       return res.redirect('/admin/dashboard')
+    }
     req.flash('success_msg',"User account deleted successfully!")
-    res.redirect('/admin/dashboard')
+    return res.redirect('/admin/dashboard')
   } catch (err) {
     console.log(err)
-    res.redirect('/admin/dashboard')
+    return res.redirect('/admin/dashboard')
   }
 };

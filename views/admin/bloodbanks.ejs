@@ -105,27 +105,27 @@ $(document).ready(function () {
                                   <input type="text" placeholder="Enter Contact" name="contact" value="<%=bank.contact%>" class="form-control m-2"></input>
                                   <div class="input-group">
                                       <label class="form-label m-auto">Total O+ :</label>
-                                      <input type="number" name="o_pos" value="<%=bank.bloodgroup[0].quantity%>" class="form-control m-2"></input> 
+                                      <input type="number" name="o_pos" value="<%=bank.bloodgroup[0].quantity%>" min="0" class="form-control m-2"></input> 
                                       <label class="form-label m-auto">Total O- :</label>
-                                      <input type="number" name="o_neg" value="<%=bank.bloodgroup[1].quantity%>" class="form-control m-2"></input>
+                                      <input type="number" name="o_neg" value="<%=bank.bloodgroup[1].quantity%>" min="0" class="form-control m-2"></input>
                                   </div>
                                   <div class="input-group">
                                       <label class="form-label m-auto">Total A+ :</label>
-                                      <input type="number" name="a_pos" value="<%=bank.bloodgroup[2].quantity%>" class="form-control m-2"></input> 
+                                      <input type="number" name="a_pos" value="<%=bank.bloodgroup[2].quantity%>" min="0" class="form-control m-2"></input> 
                                       <label class="form-label m-auto">Total A- :</label>
-                                      <input type="number" name="a_neg" value="<%=bank.bloodgroup[3].quantity%>" class="form-control m-2"></input>
+                                      <input type="number" name="a_neg" value="<%=bank.bloodgroup[3].quantity%>" min="0" class="form-control m-2"></input>
                                   </div>
                                   <div class="input-group">
                                       <label class="form-label m-auto">Total B+ :</label>
-                                      <input type="number" name="b_pos" value="<%=bank.bloodgroup[4].quantity%>" class="form-control m-2"></input> 
+                                      <input type="number" name="b_pos" value="<%=bank.bloodgroup[4].quantity%>" min="0" class="form-control m-2"></input> 
                                       <label class="form-label m-auto">Total B- :</label>
-                                      <input type="number" name="b_neg" value="<%=bank.bloodgroup[5].quantity%>" class="form-control m-2"></input>
+                                      <input type="number" name="b_neg" value="<%=bank.bloodgroup[5].quantity%>" min="0" class="form-control m-2"></input>
                                   </div>
                                   <div class="input-group">
                                       <label class="form-label m-auto">Total AB+ :</label>
-                                      <input type="number" name="ab_pos" value="<%=bank.bloodgroup[6].quantity%>" class="form-control m-2"></input> 
+                                      <input type="number" name="ab_pos" value="<%=bank.bloodgroup[6].quantity%>" min="0" class="form-control m-2"></input> 
                                       <label class="form-label m-auto">Total AB- :</label>
-                                      <input type="number" name="ab_neg" value="<%=bank.bloodgroup[7].quantity%>" class="form-control m-2"></input>
+                                      <input type="number" name="ab_neg" value="<%=bank.bloodgroup[7].quantity%>" min="0" class="form-control m-2"></input>
                                   </div>
                               </div>
                             </div>
