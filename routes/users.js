@@ -24,6 +24,7 @@ const {
   getBloodBank,
 } = require("../controllers/user.controller");
 const { ensureAuthenticated } = require("../config/auth");
+const { sendMail } = require("../controllers/index.controller");
 
 // Login Page
 router.get("/login", getLogin);
@@ -36,7 +37,7 @@ router.get("/profile",ensureAuthenticated, getProfile);
 //Request blood form
 router.get("/requestblood", ensureAuthenticated, getRequestBloodForm);
 //Request blood
-router.post("/requestblood", ensureAuthenticated, userRequestBlood);
+router.post("/requestblood", ensureAuthenticated, userRequestBlood,sendMail);
 //Get Requestors
 router.get("/donateblood/requestors", ensureAuthenticated, userGetRequestors);
 //Update Status

@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const moment = require("moment");
+const nodemailer = require("nodemailer")
 
 const { User, Post } = require("../models/User");
 const Activity = require("../models/Activity");
@@ -72,19 +73,25 @@ exports.updateUserStatus = async (req, res) => {
 };
 
 exports.getRequestBloodForm = async (req, res) => {
+  const userPosts = await Post.findOne({ creator: req.user._id });  
+  let hasPost = false
+
+  userPosts ? hasPost = true : hasPost
+  console.log(hasPost);
+
   res.render("./user/requestblood", {
     user: req.user,
+    hasPost,
     moment,
   });
 };
 
-exports.userRequestBlood = async (req, res) => {
+exports.userRequestBlood = async (req, res, next) => {
   const { desc, title } = req.body;
   const userAge = moment().diff(req.user.dob, "years");
+  const userPosts = await Post.findOne({ creator: req.user._id });  
 
   try {
-    const userPosts = await Post.findOne({ creator: req.user._id });  
-
     if (userPosts) {
       req.flash("error_msg", "Sorry! You have already requested for blood");
       return res.redirect("/users/requestblood");
@@ -108,6 +115,53 @@ exports.userRequestBlood = async (req, res) => {
       postType: "request",
       imageUrl: null,
     });
+
+    //send mail
+    let transporter = await nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      auth: {
+        user: 'bloodmatters001@gmail.com',
+        pass: process.env.APP_PASSWORD
+      }
+    })
+
+    const output = `
+                      <p>You have a new blood request <span style="color:green;">[${req.user.bloodgroup}]</span></p>
+                      <h3>Request Details</h3>
+                      <ul>
+                        <li>Id : <b>${req.user.id}</b></li>
+                        <li>Name : <b>${req.user.name}</b></li>
+                        <li>Bloodgroup : <b>${req.user.bloodgroup}</b></li>
+                        <li>Phonenumber : <b>${req.user.phonenumber}</b></li?
+                        <li>Request Date  : <b>${moment(
+                          post.createdAt
+                        ).format("YYYY-MM-DD")}</b></li>
+                        <li>Request Description : <b>${post.body}</b></li>
+                          </ul>
+      `;
+    
+    const users = await User.find({}) 
+    const emailList = []
+    users.forEach(user=>{
+      emailList.push(user.email)
+    })
+    
+
+    let details = {
+        from : '"BloodMatters",<bloodmatters001@gmail.com>',
+        // to : [...emailList],
+        to : 'bloodmatters001@gmail.com',
+        subject : "Blood Request",
+        html: `${output}`
+    }
+    
+    let info = await transporter.sendMail(details)
+
+    if(!info){
+      req.flash('Failed to send email')
+      return res.redirect('/users/requestblood')
+    }
 
     await post.save();
 

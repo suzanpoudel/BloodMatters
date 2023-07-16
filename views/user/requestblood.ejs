@@ -48,13 +48,17 @@
                       <input type="text" placeholder="Enter description" name="desc" class="form-control my-3 border-1 border-success"></input>
                     </div>
                     <hr>
+                    <% if(!hasPost) { %>
+                    </div>
+                  <button type="submit" class="btn btn-success m-2 col-5">Request Blood</button>
                 </div>
-                <button type="submit" class="btn btn-success m-2 col-5">Request Blood</button>
-              </div>
-            </form>
-            <form action="/users/updateStatus/<%=user._id%>" method="post">
-              <button type="submit" class="btn btn-danger mb-3 col-5">Cancel Request</button>
-            </form>
+              </form>
+                <% } else{ %>
+                </form>
+                <form action="/users/updateStatus/<%=user._id%>" method="post">
+                  <button type="submit" class="btn btn-danger mb-3 col-5">Cancel Request</button>
+                </form>
+               <% } %>
           </div>
         </div>
     </div>
