@@ -43,7 +43,7 @@ include('.././partials/sidemenu.ejs'); %>
         <tbody>
           <tr>
             <td><a href="/profile/<%=User._id%>" style="text-decoration: none;"><b class="text-dark"><%=User.name%><b></a></td>
-            <td><button class="btn btn-secondary m-0 py-0"></button><%=User.bloodgroup%></td>
+            <td><button class="btn btn-secondary m-0 py-0"><%=User.bloodgroup%></button></td>
             <td><%=User.address%></td>
             <% if (User.status === 'Idle') { %>
               <td><button type="button" class="btn btn-secondary m-0 py-0"><%=User.status%></button></td>

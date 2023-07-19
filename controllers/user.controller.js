@@ -44,7 +44,7 @@ exports.getRegister = async (req, res) => {
 
 exports.updateUserStatus = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.params.id });
+    const user = await User.findOne({ _id : req.user._id });
 
     if (req.body) {
       user.status = req.body.status;
@@ -55,12 +55,17 @@ exports.updateUserStatus = async (req, res) => {
 
     const post = await Post.findOneAndDelete({ creator: req.user._id });
 
-    const activity = await Activity.findOneAndUpdate(
-      {postId:post._id},
-      {status : 'Cancelled'},
-      {new : true}
-      )
-      
+    if(post){
+      const activity = await Activity.findOneAndUpdate(
+        {postId:post._id},
+        {status : 'Cancelled'},
+        {new : true}
+        )
+
+        await activity.save()
+    }
+
+
     req.flash(
       "success_msg",
       "Status updated successfully! All requests have been cleared!"
@@ -104,7 +109,7 @@ exports.userRequestBlood = async (req, res, next) => {
     if (userAge < 18 || userAge > 60) {
       req.flash(
         "error_msg",
-        "Sorry! You are not eligible to donate blood (Eligibility : 18 - 60 years)"
+        "Sorry! You are not eligible to request/donate blood (Eligibility : 18 - 60 years)"
       );
       return res.redirect("/users/requestblood");
     }
@@ -266,6 +271,16 @@ exports.userDonateBlood = async(req,res)=>{
     const postId = req.params.id
     const post = await Post.findOne({_id:postId}).populate("creator", "-password -isAdmin -date -__v").exec()
     const receiverId = post.creator._id
+    const userAge = moment().diff(req.user.dob, "years");
+
+    //age validation 
+    if (userAge < 18 || userAge > 60) {
+      req.flash(
+        "error_msg",
+        "Sorry! You are not eligible to donate blood (Eligibility : 18 - 60 years)"
+      );
+      return res.redirect("/users/donateblood/requestors");
+    }
 
     //check if notification exists for that sender
     const donationRequest = await Activity.find({sender : senderId, receiver:receiverId})

@@ -1,6 +1,7 @@
 const passport = require("passport");
 const moment = require("moment");
 const cloudinary = require("cloudinary");
+const nodemailer = require("nodemailer")
 
 require("../../handlers/cloudinary");
 
@@ -135,7 +136,24 @@ exports.adminCreatePost = async (req, res) => {
       user: req.user,
     });
   } else {
+    
     try {
+          const users = await User.find({}) 
+          const emailList = []
+          users.forEach(user=>{
+          emailList.push(user.email)
+        })
+     
+         //mail : setup 
+         let transporter = await nodemailer.createTransport({
+          service: 'gmail',
+          host: 'smtp.gmail.com',
+          auth: {
+            user: 'bloodmatters001@gmail.com',
+            pass: process.env.APP_PASSWORD
+          }
+        })
+
       if (req.file) {
         const result = await cloudinary.v2.uploader.upload(req.file.path);
         if (!result) {
@@ -152,7 +170,30 @@ exports.adminCreatePost = async (req, res) => {
           postType: "info",
           imageUrl: result?.secure_url,
         });
-        await post.save();
+
+     //mail output   
+    const output = `
+                      <p>New Post!</p>
+                      <h2>${post.title}</h2>
+                      <h4>${post.body}</h4>
+                      ${post.imageUrl}
+                      <p>Posted by : <b>${req.user.name}</b><span> on <b>${moment(
+                        post.createdAt
+                      ).format("YYYY-MM-DD")}</b></span> </p> `
+      
+      
+                      let details = {
+                        from : '"BloodMatters",<bloodmatters001@gmail.com>',
+                        // to : [...emailList],
+                        to : 'bloodmatters001@gmail.com',
+                        subject : "BloodMatters Post",
+                        html: `${output}`
+                    }
+                
+                    await transporter.sendMail(details)
+    
+      await post.save();
+
       } else {
         const post = new Post({
           creator: req.user._id,
@@ -160,8 +201,31 @@ exports.adminCreatePost = async (req, res) => {
           body: body,
           imageUrl: null,
         });
+
+         //mail output
+        const output = `
+                      <p>New Post!</p>
+                      <h2>${post.title}</h2>
+                      <h4>${post.body}</h4>
+                      <p>Posted by : <b>${req.user.name}</b><span> on <b>${moment(
+                        post.createdAt
+                      ).format("YYYY-MM-DD")}</b></span> </p> `
+
+        
+      let details = {
+        from : '"BloodMatters",<bloodmatters001@gmail.com>',
+        // to : [...emailList],
+        to : 'bloodmatters001@gmail.com',
+        subject : "BloodMatters Post",
+        html: `${output}`
+    }
+
+       await transporter.sendMail(details)
+                      
         await post.save();
       }
+
+
 
       req.flash("success_msg", "Post uploaded successfully!!");
       res.redirect("/admin/post/info");
