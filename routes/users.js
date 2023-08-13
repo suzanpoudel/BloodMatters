@@ -37,7 +37,7 @@ router.get("/profile",ensureAuthenticated, getProfile);
 //Request blood form
 router.get("/requestblood", ensureAuthenticated, getRequestBloodForm);
 //Request blood
-router.post("/requestblood", ensureAuthenticated, userRequestBlood,sendMail);
+router.post("/requestblood", ensureAuthenticated, userRequestBlood);
 //Get Requestors
 router.get("/donateblood/requestors", ensureAuthenticated, userGetRequestors);
 //Update Status

@@ -126,7 +126,7 @@ exports.userRequestBlood = async (req, res, next) => {
       service: 'gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'bloodmaters@gmail.com',
+        user: 'bloodmatters001@gmail.com',
         pass: process.env.APP_PASSWORD
       }
     })
@@ -138,7 +138,7 @@ exports.userRequestBlood = async (req, res, next) => {
                         <li>Id : <b>${req.user.id}</b></li>
                         <li>Name : <b>${req.user.name}</b></li>
                         <li>Bloodgroup : <b>${req.user.bloodgroup}</b></li>
-                        <li>Phonenumber : <b>${req.user.phonenumber}</b></li?
+                        <li>Phonenumber : <b>${req.user.phonenumber}</b></li>
                         <li>Request Date  : <b>${moment(
                           post.createdAt
                         ).format("YYYY-MM-DD")}</b></li>
@@ -148,15 +148,37 @@ exports.userRequestBlood = async (req, res, next) => {
     
     const users = await User.find({}) 
     const emailList = []
-    users.forEach(user=>{
+    // users.forEach(user=>{
+    //   emailList.push(user.email)
+    // })
+    const compatibilityMatrix = { // x -> can receive blood from -> [...]
+      "O-": ["O-"],
+      "O+": [ "O+","O-"],
+      "A-": ["A-","O-"],
+      "A+": ["A+","A-","O+","O-"],
+      "B-": ["B-","O-"],
+      "B+": ["B+", "B-","O+","O-"],
+      "AB-": ["AB-","A-","B-","O-"],
+      "AB+": ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"]
+    };  
+    
+    const currentUserBloodGroup = req.user.bloodgroup
+    compatibleBloodGroup = compatibilityMatrix[currentUserBloodGroup]
+
+    const filteredUsers = users.filter(
+      (user) => 
+        user.status == "Doner" &&
+        compatibleBloodGroup.includes(user.bloodgroup)
+      );
+
+    filteredUsers.forEach(user => {
       emailList.push(user.email)
     })
-    
 
     let details = {
-        from : '"BloodMatters",<bloodmaters@gmail.com>',
-        // to : [...emailList],
-        to : 'bloodmaters@gmail.com',
+        from : '"BloodMatters",<bloodmatters001@gmail.com>',
+        to : [...emailList],
+        // to : 'bloodmatters001@gmail.com',
         subject : "Blood Request",
         html: `${output}`
     }
@@ -229,7 +251,7 @@ exports.userGetRequestors = async (req, res) => {
       activeReqCreatorId = [... new Set(activeReqCreatorId)]
       console.log('Active post creators list',activeReqCreatorId);
 
-      const compatibilityMatrix = {
+      const compatibilityMatrix = {     // x -> can give blood to -> [...]
         "O-": ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"],
         "O+": [ "O+", "A+", "B+" , "AB+"],
         "A-": ["A-","A+","AB-", "AB+"],
@@ -240,8 +262,8 @@ exports.userGetRequestors = async (req, res) => {
         "AB+": ["AB+"]
       };  
       
-      const userBloodGroup = req.user.bloodgroup
-      compatibleBloodGroup = compatibilityMatrix[userBloodGroup]
+      const currentUserBloodGroup = req.user.bloodgroup
+      compatibleBloodGroup = compatibilityMatrix[currentUserBloodGroup]
       
     const filteredPosts = posts.filter(
       (post) => 

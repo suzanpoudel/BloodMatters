@@ -7,6 +7,119 @@ exports.welcome = async (req, res) => {
   res.render("index");
 };
 
+exports.contactPage = async (req, res) => {
+  res.render("contact");
+};
+
+exports.submitContactForm = async(req,res)=>{
+  try {
+
+    //get form values 
+    const {name,email,dob,gender,bloodgroup,phonenumber,address,msg} = req.body
+
+    let errors = [];
+
+  if (
+    !name ||
+    !email ||
+    !bloodgroup ||
+    !phonenumber ||
+    !address ||
+    !dob ||
+    !gender
+  ) {
+    errors.push({ msg: "Please enter all fields" });
+    console.log(req.body);
+  }
+
+  let dob1 = new Date(dob)
+ 
+  if(dob1 >= Date.now()){
+    errors.push({msg:"Invalid Date of Birth!"})
+  }
+
+  const phonePattern = /^(01\d{7}|98\d{8})$/;
+  function validatePhone(phone) {
+    // Test the phone number against the pattern and return the result
+    return phonePattern.test(phone);
+  }
+
+  const emailPattern =
+    /^[a-zA-Z0-9_.+-]+@(gmail|yahoo|outlook|hotmail|proton)\.com$/;
+  function validateEmail(email) {
+    // Test the phone number against the pattern and return the result
+    return emailPattern.test(email);
+  }
+
+  if (validateEmail(email) == false) {
+    errors.push({ msg: "Invalid email" });
+  }
+
+  if (validatePhone(phonenumber) == false) {
+    errors.push({ msg: "Invalid phone number" });
+  }
+
+  if (errors.length > 0) {
+    res.render("register", {
+      errors,
+      name,
+      email,
+      dob,
+      gender,
+      address,
+      bloodgroup,
+      phonenumber,
+      msg
+    });
+  } else {
+
+    let transporter = await nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      auth: {
+        user: 'bloodmatters001@gmail.com',
+        pass: process.env.APP_PASSWORD
+      }
+    })
+
+    const output = `
+                      <p>New Contact Request</p>
+                      <h3>Contact Details</h3>
+                      <ul>
+                        <li>Name : <b>${name}</b></li>
+                        <li>Email : <b>${email}</b></li>
+                        <li>Phonenumber : <b>${phonenumber}</b></li>
+                        <li>Blood Group : <b>${bloodgroup}</b></li>
+                        <li>Gender : <b>${gender}</b></li>
+                        <li>Date of Birth : <b>${dob}</b></li>
+                        <li>Address : <b>${address}</b></li>
+                        <li>Message : <b>${msg?msg:null}</b></li>
+                          </ul>
+      `;
+    
+    let details = {
+        from : '"BloodMatters",<bloodmatters001@gmail.com>',
+        to : "bloodmatters001@gmail.com",
+        subject : "Contact Request",
+        html: `${output}`
+    }
+    
+    let info = await transporter.sendMail(details)
+    
+    if(!info){
+      req.flash('Failed to submit contact details')
+      return res.redirect('/contact')
+    }
+    req.flash("success_msg", "Success! Your contact details was sent. Thank you for your reqeust!");
+    res.redirect("/contact");
+  }
+}catch(err){
+console.log(err);
+res.send('Something went wrong')
+}
+}
+
+
 exports.getErrorPage = async (req, res) => {
   res.render("errorpage", {
     user: req.user,
@@ -41,47 +154,4 @@ exports.getUserById = async (req, res) => {
     res.redirect("/userslist");
   }
 };
-
-exports.sendMail = async(req,res,post)=>{
-  try {
-    let transporter = await nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmail.com',
-      auth: {
-        user: 'bloodmatters001@gmail.com',
-        pass: process.env.APP_PASSWORD
-      }
-    })
-
-    const output = `
-                      <p>You have a new blood request</p>
-                      <h3>Request Details</h3>
-                      <ul>
-                        <li>Requestor Id : ${req.user.id}</li>
-                        <li>Requestor Name : ${req.user.fname} ${
-        req.user.lname
-      }</li>
-                        <li>Request Date  : ${moment(
-                          post.createdAt
-                        ).format("YYYY-MM-DD")}</li>
-                        <li>Request Description : ${post.reason}
-                          </ul>
-      `;
-    
-    let details = {
-        from : '"BloodMatters",<bloodmatters001@gmail.com>',
-        to : "sujansapkota7777@gmail.com,sujanp020391@nec.edu.np,sujantest777@gmail.com",
-        subject : "Blood Request",
-        text : 'Testing mail service for bloodmatter'
-    
-    }
-    
-    let info = await transporter.sendMail(details)
-    res.send(info)
-
-}catch(err){
-console.log(err);
-res.send('Something went wrong')
-}
-}
 

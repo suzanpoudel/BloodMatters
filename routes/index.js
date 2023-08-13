@@ -6,7 +6,8 @@ const {
   getUsers,
   getUserById,
   getErrorPage,
-  sendMail,
+  contactPage,
+  submitContactForm
 } = require("../controllers/index.controller");
 
 const {
@@ -17,12 +18,15 @@ const {
 // Welcome Page
 router.get("/",welcome);
 
+//contact us page
+router.get("/contact",contactPage);
+router.post("/submitcontact",submitContactForm)
+
+//error page
 router.get("/errorpage", ensureAuthenticated, getErrorPage);
 
 router.get("/userslist", ensureAuthenticated, getUsers);
-
 router.get("/profile/:id", ensureAuthenticated, getUserById);
 
-router.get("/sendmail",sendMail)
 
 module.exports = router;
