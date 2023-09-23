@@ -22,6 +22,10 @@ include('.././partials/sidemenu.ejs'); %>
 
 <main>
   <div class="px-4 py-5 my-5">
+    <div class="text-danger">
+      <h3 class="fw-bold">Donate Blood</h3>
+      <hr />
+    </div>
     <%- include('.././partials/messages.ejs'); %> <% if(posts.length == 0) { %>
     <p class="lead">No requestors</p>
     <% } else { %> <% posts.forEach(Post => { %>

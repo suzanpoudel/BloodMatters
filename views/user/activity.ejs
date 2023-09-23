@@ -25,16 +25,19 @@
   </script>
 <main>
   <section>
-    <div class="container py-2 mt-5">
-      
+    <div class="px-4 py-5 my-5">
+      <div class="text-danger">
+        <h3 class="fw-bold">Activity</h3>
+        <hr />
+      </div>
       <% if(activities.length == 0) { %>
         <p class="lead mt-5">No activities till now</p>
         <% } else { %>
-          <div class="form-outline mt-5">
+          <div class="form-outline mt-4">
             <input type="text" id="search" class="form-control" placeholder="Search here" aria-label="Search" />
           </div>
           <%- include('.././partials/messages.ejs'); %>
-            <table class="table table-hover mt-5" id="datatable"> 
+            <table class="table table-hover mt-3" id="datatable"> 
               <thead class="bg-dark">
                 <tr>
                   <th scope="col" id="user_col" class="text-light">User</th>

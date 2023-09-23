@@ -24,13 +24,17 @@ include('.././partials/sidemenu.ejs'); %>
       });
   </script>
 <main>
-  <section style="background-color: #eee">
-    <div class="container py-2 mt-5">
-      <div class="form-outline mt-5">
+  <section>
+    <div class="px-4 py-5 my-5">
+      <div class="text-danger">
+        <h3 class="fw-bold">Users List</h3>
+        <hr />
+      </div>
+      <div class="form-outline mt-3">
         <input type="search" id="search" class="form-control" placeholder="Search here" aria-label="Search" />
       </div>
       <%- include('.././partials/messages.ejs'); %>
-      <table class="table table-hover mt-5" id="datatable">
+      <table class="table table-hover mt-3" id="datatable">
         <thead class="bg-dark">
           <tr>
             <th scope="col" class="text-light">Name</th>

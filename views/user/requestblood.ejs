@@ -22,13 +22,17 @@
 <!--Main layout-->
 
 <main>
-  <div class="px-4 py-5 my-5 text-center">
+  <div class="px-4 py-5 my-5">
+    <div class="text-danger">
+      <h3 class="fw-bold">Request Blood</h3>
+      <hr />
+      </div>
     <form action="/users/requestblood" method="POST">
       <div class="col-5 m-auto mt-5">
         <div class="card border-1 border-dark">
-          <div class="card-body">
+          <div class="card-body text-center">
             <div class="form-group ">
-              <label class="form-label"><h4>Request Blood</h4></label>
+              <label class="form-label"><h4>Blood Request From</h4></label>
               <hr>
               <%- include('.././partials/messages.ejs'); %>
                     <div class="input-group">

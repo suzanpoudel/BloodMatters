@@ -30,19 +30,8 @@
   </style>
 
   <body>
-    <header>
-      <div id="nav">
-        <div class="header-logo">
-          <a href="/"><img src="/public/Images/BloodMattresLogo.png" /></a>
-        </div>
-        <!-- <div class="header-list" id="headerl">
-                <ul>
-                    <li><a href="help.html">Get Help</li></a>
-                    <li><a href="index.html#about-us">About Us</a></li>
-                </ul>
-            </div> -->
-      </div>
-    </header>
+    <%- include('./partials/index_nav.ejs'); %>
+
 
     <div class="inner">
       <div class="photo">
@@ -147,7 +136,7 @@
             <button type="submit" class="button primary">Create Account</button>
           </div>
           <div class="d-flex justify-content-center">
-            <p class="text-light">Already registered?<a href="/users/login" style="text-decoration: none;"><h5 class="ms-2">Login</h5></a> </p>
+            <p class="text-light">Already registered?</p><a href="/users/login" style="text-decoration: none;"><h5 class="ms-2 text-warning">Login</h5></a>
         </div>
         </form>
       </div>

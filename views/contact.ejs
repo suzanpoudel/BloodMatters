@@ -27,29 +27,24 @@
     .padl {
       padding-right: 10px;
     }
+
+    .photo{
+      margin: auto;
+      width: 35%;
+      height: 50%;
+
+    }
   </style>
 
   <body>
-    <header>
-      <div id="nav">
-        <div class="header-logo">
-          <a href="/"><img src="/public/Images/BloodMattresLogo.png" /></a>
-        </div>
-        <!-- <div class="header-list" id="headerl">
-                <ul>
-                    <li><a href="help.html">Get Help</li></a>
-                    <li><a href="index.html#about-us">About Us</a></li>
-                </ul>
-            </div> -->
-      </div>
-    </header>
+     <%- include('./partials/index_nav.ejs'); %>
 
     <div class="inner">
       <div class="photo">
-        <img src="/public/Images/registerINAGE.jpg" />
+        <img src="/public/Images/contact.jpg" />
       </div>
       <div class="user-form">
-        <h1>Submit Your Details</h1>
+        <h1>Contact Us</h1>
         <%- include('./partials/messages.ejs'); %>
         <form action="/submitcontact" method="post">
           <i class="fas fa-user icon"></i>
@@ -71,63 +66,22 @@
           />
           <br />
     
-          <div class="input-group">
-            <div class="col-md-6 padl">
-              <input
-                type="text"
-                name="dob"
-                placeholder="Date of Birth"
-                onfocus="(this.type = 'date')"
-                value="<%= typeof dob != 'undefined' ? dob : '' %>"
-              />
-            </div>
-            <div class="col-md-6">
-              <select name="gender" id="gender">
-                <option value="" disabled selected>Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Others">Others</option>
-              </select>
-            </div>
-            <br />
-          </div>
-
-          <div class="input-group">
-            <div class="col-md-6 padl">
-              <select name="bloodgroup" id="bloodgroup">
-                <option value="" disabled selected>Select Blood Group</option>
-                <option value="A+">A+</option>
-                <option value="O+">O+</option>
-                <option value="B+">B+</option>
-                <option value="AB+">AB+</option>
-                <option value="A-">A-</option>
-                <option value="O-">O-</option>
-                <option value="B-">B-</option>
-                <option value="AB-">AB-</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <input
-                type="number"
-                name="phonenumber"
-                placeholder="Phonenumber"
-                value="<%= typeof phonenumber != 'undefined' ? phonenumber : '' %>"
-              />
-            </div>
-          </div>
           <input
             type="text"
             name="address"
             placeholder="Address"
             value="<%= typeof address != 'undefined' ? address : '' %>"
           />
-          <input
+
+          <textarea
+          class="p-2"
+          id="msg_input"
             type="text"
             name="msg"
             placeholder="Message"
             value="<%= typeof msg != 'undefined' ? msg : '' %>"
-          />
-
+          ></textarea>
+    
           <div class="action-button">
             <button type="submit" class="button primary">Submit</button>
           </div>

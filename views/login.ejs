@@ -18,12 +18,8 @@
 <title>Start Saving Lives </title>
 
 <body>
-    <header>
-        <div id="nav">
-            <div class="header-logo"> <a href="/"><img src="/public/Images/BloodMattresLogo.png"></a>
-            </div>
-        </div>
-    </header>
+    <%- include('./partials/index_nav.ejs'); %>
+
 
     <div class="inner">
         <div class="photo">
@@ -42,7 +38,7 @@
                     <button type="submit" class="button primary">Login</button>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <p class="text-light">Dont have account?<a href="/users/register" style="text-decoration: none;"><h5 class="text-primary ms-2">Register Now</h5></a> </p>
+                    <p class="text-light">Dont have account?</p><a href="/users/register" style="text-decoration: none;"><h5 class="text-warning ms-2">Register Now</h5></a>
                 </div>
             </form>
         </div>

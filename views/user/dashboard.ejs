@@ -13,6 +13,7 @@
   crossorigin="anonymous"
 />
 
+
 <!--Main layout-->
 <!-- <main style="margin-top: 58px;">
     <div class="container pt-4">
@@ -23,36 +24,35 @@
 
 <main>
   <div class="px-4 py-5 my-5">
-    <div class="text-center">
-      <h1 class="display-5 fw-bold">Welcome to BloodMatters Dashboard</h1>
+    <div class="text-danger">
+      <h3 class="fw-bold">Dashboard</h3>
       <hr />
     </div>
-    <%- include('.././partials/messages.ejs'); %> <% posts.forEach(Post => { %>
-    <div
-      class="card col-6 mx-auto my-5 border-1 border-dark bg-dark bg-opacity-10"
-    >
-      <div class="card-body">
-        <p class="card-text">
-          <small class="text-muted"
-            ><%= moment(Post.updatedAt).format('LLLL')%></small
-          >
-        </p>
-        <h5 class="card-title"><%= Post.title%></h5>
-        <p class="card-text"><%= Post.body%></p>
-      </div>
-      <% if (Post.imageUrl) { %>
-      <img class="card-img-top" src="<%=Post.imageUrl%>" alt="Card image cap" />
-      <% } %>
-      <div class="card-footer">
-        <p class="card-text my-3">
-          <small class="text-muted"
-            >Posted by:
-            <b class="text-success"><%=Post.creator.name%></b></small
-          >
-        </p>
+  <%- include('.././partials/messages.ejs'); %> <% posts.forEach(Post => { %>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-footer bg-danger text-light">
+            <h5 class="card-title"><%= Post.title%></h5>
+          </div>
+          <h6 class="px-2 py-4 fw-normal"><%= Post.body%></h6>
+        <img src="<%=Post.imageUrl%>" class="card-img-top border" alt="post image">
+          <div class="card-footer">
+            <p class="card-text my-3">
+              <small class="text-muted"
+                >Posted by:
+                <b class="text-success"><%=Post.creator.name%>, </b></small
+              >
+              <small class="text-muted">
+                <b class="text-success"><%= moment(Post.updatedAt).format('LLLL')%></b></small
+              >
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <hr />
-    <% }) %>
   </div>
+  <br>
+  <% }) %>
 </main>
