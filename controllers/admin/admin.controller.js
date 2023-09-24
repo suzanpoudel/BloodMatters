@@ -149,7 +149,7 @@ exports.adminCreatePost = async (req, res) => {
           service: 'gmail',
           host: 'smtp.gmail.com',
           auth: {
-            user: 'bloodmatters001@gmail.com',
+            user: `${process.env.ADMIN_EMAIL}`,
             pass: process.env.APP_PASSWORD
           }
         })
@@ -183,9 +183,9 @@ exports.adminCreatePost = async (req, res) => {
       
       
                       let details = {
-                        from : '"BloodMatters",<bloodmatters001@gmail.com>',
-                        // to : [...emailList],
-                        to : 'bloodmatters001@gmail.com',
+                        from : `${process.env.ADMIN_EMAIL}`,
+                        to : [...emailList],
+                        // to : 'bloodmatters001@gmail.com',
                         subject : "BloodMatters Post",
                         html: `${output}`
                     }
@@ -213,9 +213,9 @@ exports.adminCreatePost = async (req, res) => {
 
         
       let details = {
-        from : '"BloodMatters",<bloodmatters001@gmail.com>',
-        // to : [...emailList],
-        to : 'bloodmatters001@gmail.com',
+        from : `${process.env.ADMIN_EMAIL}`,
+        to : [...emailList],
+        // to : 'bloodmatters001@gmail.com',
         subject : "BloodMatters Post",
         html: `${output}`
     }

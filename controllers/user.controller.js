@@ -126,7 +126,7 @@ exports.userRequestBlood = async (req, res, next) => {
       service: 'gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'bloodmatters001@gmail.com',
+        user: `${process.env.ADMIN_EMAIL}`,
         pass: process.env.APP_PASSWORD
       }
     })
@@ -176,7 +176,7 @@ exports.userRequestBlood = async (req, res, next) => {
     })
 
     let details = {
-        from : '"BloodMatters",<bloodmatters001@gmail.com>',
+        from : `${process.env.ADMIN_EMAIL}`,
         to : [...emailList],
         // to : 'bloodmatters001@gmail.com',
         subject : "Blood Request",

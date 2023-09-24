@@ -70,7 +70,7 @@ exports.submitContactForm = async(req,res)=>{
       service: 'gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'bloodmatters001@gmail.com',
+        user: `${process.env.ADMIN_EMAIL}`,
         pass: process.env.APP_PASSWORD
       }
     })
@@ -88,7 +88,7 @@ exports.submitContactForm = async(req,res)=>{
       `;
     
     let details = {
-        from : `${email}`,
+        from : `${process.env.ADMIN_EMAIL}`,
         to : `${process.env.ADMIN_EMAIL},${email}`,
         subject : "Contact Request",
         html: `${output}`
