@@ -89,7 +89,7 @@ exports.submitContactForm = async(req,res)=>{
     
     let details = {
         from : `${email}`,
-        to : `bloodmatters001@gmail.com`,
+        to : `${process.env.ADMIN_EMAIL},${email}`,
         subject : "Contact Request",
         html: `${output}`
     }
@@ -104,8 +104,8 @@ exports.submitContactForm = async(req,res)=>{
     res.redirect("/contact");
   }
 }catch(err){
-console.log(err);
-res.send('Something went wrong')
+  req.flash("error_msg", "Something went wrong!");
+    res.redirect("/contact");
 }
 }
 

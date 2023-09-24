@@ -3,11 +3,12 @@ const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser")
 const session = require("express-session");
 const dotenv = require("dotenv");
 const path = require("path");
 const morgan = require("morgan");
-
+const MongoStore = require('connect-mongo');
 dotenv.config();
 
 const app = express();
@@ -36,8 +37,16 @@ require("./config/passport")(passport);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log("Mongo connect vayena dost"));
-
+  .catch((err) => console.log("Error connecting MongoDB"));
+  
+  app.use(cookieParser());
+  // Express session
+app.use(session({
+    secret: 'my-secret',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl:process.env.MONGO_URI })
+}));
 // EJS
 app.use(expressLayouts);
 app.set("view engine", "ejs");
@@ -45,14 +54,6 @@ app.set("view engine", "ejs");
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 
-// Express session
-app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
 
 // Passport middleware
 app.use(passport.initialize());
