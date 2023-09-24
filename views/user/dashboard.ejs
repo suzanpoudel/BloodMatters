@@ -12,7 +12,14 @@
   integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
   crossorigin="anonymous"
 />
-
+<style>
+  div.stick-at-top {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10%;
+  /* z-index: 1; */
+  }
+</style>
 
 <!--Main layout-->
 <!-- <main style="margin-top: 58px;">
@@ -24,16 +31,16 @@
 
 <main>
   <div class="px-4 py-5 my-5">
-    <div class="text-danger">
+    <div class="text-danger-custom stick-at-top">
       <h3 class="fw-bold">Dashboard</h3>
-      <hr />
+      <!-- <hr class="col-2 border border-danger-custom border-3"/> -->
     </div>
   <%- include('.././partials/messages.ejs'); %> <% posts.forEach(Post => { %>
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="card">
         <div class="card-body">
-          <div class="card-footer bg-danger text-light">
+          <div class="card-footer bg-danger-custom text-light">
             <h5 class="card-title"><%= Post.title%></h5>
           </div>
           <h6 class="px-2 py-4 fw-normal"><%= Post.body%></h6>

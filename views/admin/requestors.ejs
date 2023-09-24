@@ -30,7 +30,7 @@
             <div class="card col-6 mx-auto my-5 border-1 border-dark bg-dark bg-opacity-10">
                 <div class="card-body">
                     <p class="card-text"><small class="text-muted"><%= moment(Post.updatedAt).format('LLLL')%></small></p>
-                    <h5 class="card-title"><%= Post.title%><span class="badge badge-primary bg-danger m-1 p-1">Type <%=Post.creator.bloodgroup%></span></h5>
+                    <h5 class="card-title"><%= Post.title%><span class="badge badge-primary bg-danger-custom m-1 p-1">Type <%=Post.creator.bloodgroup%></span></h5>
                   <p class="card-text"><%= Post.body%></p>
                 </div>
                 <div class="card-footer">
@@ -38,7 +38,7 @@
                         <a href="/admin/userprofile/<%=Post.creator._id%>" 
                             style="text-decoration: none;"><%=Post.creator.name%><span class="badge badge-dark bg-dark m-1 p-1">Age <%=moment().diff(Post.creator.dob,'years')%></span><span class="badge badge-dark bg-dark m-1 p-1"> <%=Post.creator.address%></span>
                         </a></b></small></p>
-                  <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal">Delete <i class="fas fa-trash"></i></button> -->
+                  <!-- <button type="button" class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#deletePostModal">Delete <i class="fas fa-trash"></i></button> -->
                 </div>
               </div>
               <hr class="border-3">
@@ -58,7 +58,7 @@
                                 <div class="card">
                                   <div class="card-body align-self-center">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger-custom">Delete</button>
                                   </div>
                                 </div>
                             </div>

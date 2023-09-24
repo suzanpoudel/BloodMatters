@@ -26,7 +26,7 @@ include('.././partials/sidemenu.ejs'); %>
 <main>
   <section>
     <div class="px-4 py-5 my-5">
-      <div class="text-danger">
+      <div class="text-danger-custom">
         <h3 class="fw-bold">Users List</h3>
         <hr />
       </div>
@@ -54,7 +54,7 @@ include('.././partials/sidemenu.ejs'); %>
           <% } else if (User.status === 'Doner') { %>
             <td><button type="button" class="btn btn-warning m-0 py-0"><%=User.status%></button></td>
             <% } else { %>
-              <td><button type="button" class="btn btn-danger m-0 py-0"><%=User.status%></button></td>
+              <td><button type="button" class="btn btn-danger-custom m-0 py-0"><%=User.status%></button></td>
           <% } %>
           </tr>
         </tbody>

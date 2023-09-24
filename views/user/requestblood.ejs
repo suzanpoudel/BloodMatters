@@ -23,7 +23,7 @@
 
 <main>
   <div class="px-4 py-5 my-5">
-    <div class="text-danger">
+    <div class="text-danger-custom">
       <h3 class="fw-bold">Request Blood</h3>
       <hr />
       </div>
@@ -60,7 +60,7 @@
                 <% } else{ %>
                 </form>
                 <form action="/users/updateStatus/<%=user._id%>" method="post">
-                  <button type="submit" class="btn btn-danger mb-3 col-5">Cancel Request</button>
+                  <button type="submit" class="btn btn-danger-custom mb-3 col-5">Cancel Request</button>
                 </form>
                <% } %>
           </div>

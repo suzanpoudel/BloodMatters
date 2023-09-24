@@ -36,7 +36,7 @@
                 <div class="card-footer">
                     <p class="card-text my-3"><small class="text-muted">Posted by: <b class="text-success"><%=Post.creator.name%></b></small></p>
                     <button type="button" class="btn btn-primary edit_btn" data-bs-toggle="modal" data-bs-target="#editPostModal<%=Post._id%>">Edit <i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal<%=Post._id%>">Delete <i class="fas fa-trash"></i></button>
+                  <button type="button" class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#deletePostModal<%=Post._id%>">Delete <i class="fas fa-trash"></i></button>
                 </div>
               </div>
               <hr class="border-3">
@@ -91,7 +91,7 @@
                                 <div class="card">
                                   <div class="card-body align-self-center">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger-custom">Delete</button>
                                   </div>
                                 </div>
                             </div>

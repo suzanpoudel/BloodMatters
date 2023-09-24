@@ -16,7 +16,7 @@ $(document).ready(function () {
 <main>
     <section>
       <div class="px-4 py-5 my-5">
-        <div class="text-danger">
+        <div class="text-danger-custom">
           <h3 class="fw-bold">Blood Banks</h3>
           <hr />
         </div>
@@ -32,7 +32,7 @@ $(document).ready(function () {
                                     <p class="card-text lead"><%=bank.contact%></p>
                                 </div>
                                 <div class="m-3">
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bloodcountModal<%=bank._id%>">
+                                    <button type="button" class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#bloodcountModal<%=bank._id%>">
                                         Check Blood Quantity
                                     </button>
                                 </div>
@@ -50,7 +50,7 @@ $(document).ready(function () {
                               </div>
                               <div class="modal-body">
                                   <div class="card">
-                                      <div class="card-header text-bg-danger text-light">
+                                      <div class="card-header text-bg-danger-custom text-light">
                                         Blood Quantity
                                       </div>
                                       <ul class="list-group list-group-flush">

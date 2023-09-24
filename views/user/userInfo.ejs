@@ -5,7 +5,7 @@
 <main>
     <section>
       <div class="px-4 py-5 my-5">
-        <div class="text-danger">
+        <div class="text-danger-custom">
           <h3 class="fw-bold"><%=profile.name%></h3>
           <hr />
         </div>
@@ -21,17 +21,17 @@
                 <% } else if (profile.status === 'Doner') { %>
                   <button type="button" class="btn btn-warning m-2"><%=profile.status%></button>
                   <% } else { %>
-                    <button type="button" class="btn btn-danger m-2"><%=profile.status%></button>
+                    <button type="button" class="btn btn-danger-custom m-2"><%=profile.status%></button>
                 <% } %>
                   <p class="text-muted mb-1"><%=profile.email%></p>
                   <p class="text-muted mb-4"><%=profile.address%></p>
                   <div class="d-flex justify-content-center mb-2">
                     <% if (profile.status === 'Idle') { %>
-                        <button type="button" class="btn btn-danger col-10"><b>Request Blood</b></button>
-                        <!-- <button type="button" class="btn btn-danger">Donate</button>
+                        <button type="button" class="btn btn-danger-custom col-10"><b>Request Blood</b></button>
+                        <!-- <button type="button" class="btn btn-danger-custom">Donate</button>
                         <button type="button" class="btn btn-outline-primary ms-1">Request Blood</button> -->
                     <% } else if (profile.status === 'Doner') { %>
-                        <button type="button" class="btn btn-danger col-10"><b>Request Blood</b></button>
+                        <button type="button" class="btn btn-danger-custom col-10"><b>Request Blood</b></button>
                       <% } else { %>
                         <button type="button" class="btn btn-warning col-10">Donate</button>
                       <% } %>
@@ -101,7 +101,7 @@
                       <p class="mb-0">Blood Group</p>
                     </div>
                     <div class="col-sm-9">
-                     <span class="btn btn-danger"><b><%=profile.bloodgroup%></b></span>
+                     <span class="btn btn-danger-custom"><b><%=profile.bloodgroup%></b></span>
                     </div>
                   </div>
                   <hr>

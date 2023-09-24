@@ -11,31 +11,27 @@ exports.contactPage = async (req, res) => {
   res.render("contact");
 };
 
+exports.aboutus = async (req, res) => {
+  res.render("aboutus");
+};
+
 exports.submitContactForm = async(req,res)=>{
   try {
 
     //get form values 
-    const {name,email,dob,gender,bloodgroup,phonenumber,address,msg} = req.body
+    const {name,email,phonenumber,address,msg} = req.body
 
     let errors = [];
 
   if (
     !name ||
     !email ||
-    !bloodgroup ||
     !phonenumber ||
     !address ||
-    !dob ||
-    !gender
+    !msg
   ) {
     errors.push({ msg: "Please enter all fields" });
     console.log(req.body);
-  }
-
-  let dob1 = new Date(dob)
- 
-  if(dob1 >= Date.now()){
-    errors.push({msg:"Invalid Date of Birth!"})
   }
 
   const phonePattern = /^(01\d{7}|98\d{8})$/;
@@ -60,14 +56,11 @@ exports.submitContactForm = async(req,res)=>{
   }
 
   if (errors.length > 0) {
-    res.render("register", {
+    res.render("contact", {
       errors,
       name,
       email,
-      dob,
-      gender,
       address,
-      bloodgroup,
       phonenumber,
       msg
     });
@@ -89,17 +82,14 @@ exports.submitContactForm = async(req,res)=>{
                         <li>Name : <b>${name}</b></li>
                         <li>Email : <b>${email}</b></li>
                         <li>Phonenumber : <b>${phonenumber}</b></li>
-                        <li>Blood Group : <b>${bloodgroup}</b></li>
-                        <li>Gender : <b>${gender}</b></li>
-                        <li>Date of Birth : <b>${dob}</b></li>
                         <li>Address : <b>${address}</b></li>
                         <li>Message : <b>${msg?msg:null}</b></li>
                           </ul>
       `;
     
     let details = {
-        from : '"BloodMatters",<bloodmatters001@gmail.com>',
-        to : "bloodmatters001@gmail.com",
+        from : `${email}`,
+        to : `bloodmatters001@gmail.com`,
         subject : "Contact Request",
         html: `${output}`
     }

@@ -65,20 +65,28 @@
             value="<%= typeof email != 'undefined' ? email : '' %>"
           />
           <br />
-    
+
+          <i class="fa-solid fa-location-dot"></i>
           <input
             type="text"
             name="address"
             placeholder="Address"
             value="<%= typeof address != 'undefined' ? address : '' %>"
           />
-
+          <i class="fa-solid fa-phone"></i>
+          <input
+          type="number"
+          name="phonenumber"
+          placeholder="Phonenumber"
+          value="<%= typeof phonenumber != 'undefined' ? phonenumber : '' %>"
+        />
+        <i class="fa-solid fa-paper-plane"></i>
           <textarea
-          class="p-2"
+          class="px-4 pt-3"
           id="msg_input"
             type="text"
             name="msg"
-            placeholder="Message"
+            placeholder=" Message"
             value="<%= typeof msg != 'undefined' ? msg : '' %>"
           ></textarea>
     

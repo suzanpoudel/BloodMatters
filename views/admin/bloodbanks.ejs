@@ -29,7 +29,7 @@ $(document).ready(function () {
             <% banks.forEach(bank => { %>
                             <div class="card col-4 mb-2" id="bank">
                                 <div class="card-body">
-                                    <h5 class="card-title text-danger"><b><%=bank.name%></b></h5>
+                                    <h5 class="card-title text-danger-custom"><b><%=bank.name%></b></h5>
                                     <p class="card-text"><%=bank.address%></p>
                                     <p class="card-text lead"><%=bank.contact%></p>
                                 </div>
@@ -40,7 +40,7 @@ $(document).ready(function () {
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bankEditModal<%=bank._id%>">
                                     <i class="fas fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bankDeleteModal<%=bank._id%>">
+                                    <button type="button" class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#bankDeleteModal<%=bank._id%>">
                                       <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -58,7 +58,7 @@ $(document).ready(function () {
                                 </div>
                                 <div class="modal-body">
                                     <div class="card">
-                                        <div class="card-header text-bg-danger text-light">
+                                        <div class="card-header text-bg-danger-custom text-light">
                                           Blood Quantity
                                         </div>
                                         <ul class="list-group list-group-flush">
@@ -158,7 +158,7 @@ $(document).ready(function () {
                           <div class="card">
                             <div class="card-body align-self-center">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-danger">Delete</button>
+                                  <button type="submit" class="btn btn-danger-custom">Delete</button>
                             </div>
                           </div>
                       </div>

@@ -17,12 +17,12 @@
                 <% } else if (profile.status === 'Doner') { %>
                   <button type="button" class="btn btn-warning m-2"><%=profile.status%></button>
                   <% } else { %>
-                    <button type="button" class="btn btn-danger m-2"><%=profile.status%></button>
+                    <button type="button" class="btn btn-danger-custom m-2"><%=profile.status%></button>
                 <% } %>
                   <p class="text-muted mb-1"><%=profile.email%></p>
                   <p class="text-muted mb-4"><%=profile.address%></p>
                   <div class="d-flex justify-content-center mb-2">
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userDeleteModal<%=profile._id%>">Delete Account<i class="fas fa-trash ms-2"></i></button>
+                    <button class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#userDeleteModal<%=profile._id%>">Delete Account<i class="fas fa-trash ms-2"></i></button>
                   </div>
                 </div>
               </div>
@@ -89,7 +89,7 @@
                       <p class="mb-0">Blood Group</p>
                     </div>
                     <div class="col-sm-9">
-                     <span class="btn btn-danger"><b><%=profile.bloodgroup%></b></span>
+                     <span class="btn btn-danger-custom"><b><%=profile.bloodgroup%></b></span>
                     </div>
                   </div>
                   <hr>
@@ -202,7 +202,7 @@
                         <div class="card">
                           <div class="card-body align-self-center">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger">Delete Account</button>
+                                <button type="submit" class="btn btn-danger-custom">Delete Account</button>
                           </div>
                         </div>
                     </div>

@@ -52,9 +52,9 @@ include('.././partials/sidemenuAdmin.ejs'); %>
           <% } else if (User.status === 'Doner') { %>
             <td><button type="button" class="btn btn-warning m-0 py-0"><%=User.status%></button></td>
             <% } else { %>
-              <td><button type="button" class="btn btn-danger m-0 py-0"><%=User.status%></button></td>
+              <td><button type="button" class="btn btn-danger-custom m-0 py-0"><%=User.status%></button></td>
           <% } %>
-          <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userDeleteModal<%=User._id%>"><i class="fas fa-trash"></i></button></td>
+          <td><button class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#userDeleteModal<%=User._id%>"><i class="fas fa-trash"></i></button></td>
           </tr>
         </tbody>
       <!-- Account Delete Modal -->
@@ -74,7 +74,7 @@ include('.././partials/sidemenuAdmin.ejs'); %>
                         <div class="card">
                           <div class="card-body align-self-center">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete Account</button>
+                            <button type="submit" class="btn btn-danger-custom">Delete Account</button>
                           </div>
                         </div>
                     </div>

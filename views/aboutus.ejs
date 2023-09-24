@@ -1,0 +1,84 @@
+<link rel="stylesheet" href='https://fontawesome.com/v4.7.0/icon/bars'>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/public/Hover.css">
+<style>
+    .container{
+        margin-top: 5%;
+    }
+    i{  
+        margin: auto;
+        font-size: 500%;
+        color: #a82020;
+    }
+
+    .test:hover .fa-lightbulb{
+        color: #FFB000;
+       
+    }
+ </style>
+
+
+<body>
+    <%- include('./partials/index_nav.ejs'); %>
+    <div class="container">
+        <div class="card text-center m-5">
+            <div class="card-body">
+              <h3 class="card-title text-center" style="color: #a82020;">BloodMatters</h3>
+              <p class="card-text">Welcome to BloodMatters - where every drop counts, and every life matters</p>
+            </div>
+          </div>
+        <div class="card-group">
+            <div class="card m-3 text-center text-center hvr-icon-pulse">
+                <i class="card-img-top fa-solid fa-bullseye mx-auto mt-2 hvr-icon"></i>
+              <div class="card-body">
+                <h5 class="card-title text-center">Our Mission</h5>
+                <p class="card-text">BloodMatters is dedicated to solving critical blood emergencies by directly connecting blood donors with individuals in need.
+                </p>
+              </div>
+            </div>
+            <div class="card m-3 text-center text-center hvr-icon-push">
+                <i class="fa-solid fa-people-roof mx-auto mt-2 hvr-icon"></i>
+              <div class="card-body">
+                <h5 class="card-title text-center">What We Do</h5>
+                <p class="card-text">We facilitate direct connections between blood donors and recipients.Our platform streamlines the process, motivates donors, and ensures swift assistance.</p>
+              </div>
+            </div>
+            <div class="card m-3 text-center text-center hvr-icon test">
+                <i class="fa-solid fa-lightbulb mx-auto mt-2 hvr-icon"></i>
+              <div class="card-body">
+                <h5 class="card-title text-center">Innovation at its Core</h5>
+                <p class="card-text">BloodMatters represents an innovative approach to address global health challenges. We digitize blood banks and maintain a vast network of immediate access to blood donors.</p>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="card-group">
+            <div class="card m-3 text-center hvr-icon-spin">
+              <i class="fa-solid fa-globe mx-auto mt-2 hvr-icon"></i>
+              <div class="card-body">
+                <h5 class="card-title text-center">Building a Vital Network</h5>
+                <p class="card-text">BloodMatters fosters a strong network between users and blood banks, enhancing accessibility and responsiveness.</p>
+              </div>
+            </div>
+            <div class="card m-3 text-center hvr-icon-wobble-horizontal">
+                <i class="fa-solid fa-envelope-circle-check mx-auto mt-2 hvr-icon"></i>
+              <div class="card-body">
+                <h5 class="card-title text-center">Instant Notifications</h5>
+                <p class="card-text">With BloodMatters, we connect blood donors and recipients seamlessly through a Gmail-based notification service for donation and blood requests.</p>
+              </div>
+            </div>
+            <div class="card m-3 text-center hvr-icon-buzz">
+                <i class="fa-solid fa-hand-holding-dollar mx-auto mt-2 hvr-icon"></i>
+              <div class="card-body">
+                <h5 class="card-title text-center">Completely Free</h5>
+                <p class="card-text">Our ultimate goal is to provide an easy-to-use, fast, efficient, and entirely free solution for obtaining life-saving blood.</p>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+</body>
