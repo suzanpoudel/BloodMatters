@@ -150,7 +150,7 @@ exports.adminCreatePost = async (req, res) => {
           host: 'smtp.gmail.com',
           auth: {
             user: `${process.env.ADMIN_EMAIL}`,
-            pass: process.env.APP_PASSWORD
+            pass: `${process.env.APP_PASSWORD}`
           }
         })
 

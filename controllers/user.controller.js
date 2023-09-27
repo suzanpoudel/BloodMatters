@@ -127,7 +127,7 @@ exports.userRequestBlood = async (req, res, next) => {
       host: 'smtp.gmail.com',
       auth: {
         user: `${process.env.ADMIN_EMAIL}`,
-        pass: process.env.APP_PASSWORD
+        pass: `${process.env.APP_PASSWORD}`
       }
     })
 
