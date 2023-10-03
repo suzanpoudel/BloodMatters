@@ -11,6 +11,23 @@ exports.contactPage = async (req, res) => {
   res.render("./landing/contact");
 };
 
+exports.getBlog = async (req, res) => {
+  try {
+    const posts = await Post.find({ postType: "info" })
+      .sort({ updatedAt: "desc" })
+      .populate("creator", "-password -isAdmin -date -_v")
+      .exec();
+    res.render("./landing/blog", {
+      posts,
+      moment,
+    });
+  } catch (err) {
+    console.log(err);
+    res.flash("error_msg", "Something went wrong");
+    res.redirect("/");
+  }
+};
+
 exports.aboutus = async (req, res) => {
   res.render("./landing/aboutus");
 };

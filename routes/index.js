@@ -8,7 +8,8 @@ const {
   getErrorPage,
   contactPage,
   submitContactForm,
-  aboutus
+  aboutus,
+  getBlog
 } = require("../controllers/index.controller");
 
 const {
@@ -21,6 +22,8 @@ router.get("/",welcome);
 
 //contact us page
 router.get("/contact",contactPage);
+
+router.get("/blog",getBlog);
 
 router.post("/submitcontact",submitContactForm)
 
