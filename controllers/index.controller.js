@@ -8,11 +8,11 @@ exports.welcome = async (req, res) => {
 };
 
 exports.contactPage = async (req, res) => {
-  res.render("contact");
+  res.render("./landing/contact");
 };
 
 exports.aboutus = async (req, res) => {
-  res.render("aboutus");
+  res.render("./landing/aboutus");
 };
 
 exports.submitContactForm = async(req,res)=>{
@@ -56,7 +56,7 @@ exports.submitContactForm = async(req,res)=>{
   }
 
   if (errors.length > 0) {
-    res.render("contact", {
+    res.render("./landing/contact", {
       errors,
       name,
       email,

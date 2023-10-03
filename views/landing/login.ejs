@@ -20,60 +20,45 @@
 
 <body>
     <%- include('.././partials/index_nav_new.ejs'); %>
-    <h1 class="bg-danger">Hello</h1>
-    <!-- <section class="banner-section p_relative">
-        <div class="pattern-layer" style="background-image: url(/public/assets/images/shape/shape-1.png);"></div>
-        <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
-            <div class="slide-item p_relative">
-                <div class="shape">
-                    <div class="shape-1" style="background-image: url(/public/assets/images/shape/shape-3.png);"></div>
-                    <div class="shape-2 float-bob-y" style="background-image: url(/public/assets/images/shape/shape-4.png);"></div>
-                    <div class="shape-3 rotate-me" style="background-image: url(/public/assets/images/shape/shape-5.png);"></div>
+    
+    <section class="contact-section pt_80 pb_150 mt-5">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-12 col-sm-12 content-column">
+                    <div class="content-box mr_70">
+                        <div class="sec-title mb_45">
+                            <span class="sub-title">User Login</span>
+                            <!-- <h2>Join <span style="color: #a82020;">BloodMatters</span> Community</h2> -->
+                            <h2>Blood Bonds Start Here</h2>
+                            <p>Connecting Donors and Recipients</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="auto-container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 col-md-12 col-sm-12 content-column">
-                            <div class="content-box p_relative d_block z_5">
-                                <span class="title-text p_relative d_block">BloodMatters</span>
-                                <h2 class="p_relative d_block">Donate Today, Save Tomorrow</h2>
-                                <p class="p_relative d_block">Take Action Today by Donating Blood and Secure a Brighter, Healthier Tomorrow for Those in Need.</p>
-                                <div class="btn-box">
-                                    <a href="index.html" class="theme-btn btn-one"><span>Read More</span></a>
+                <div class="col-lg-12 col-md-12 col-sm-12 form-column">
+                    <div class="form-inner">
+                        
+            <%- include('.././partials/messages.ejs'); %>
+                        <form method="post" action="/users/login" id="contact-form" class="default-form"> 
+                          
+                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                    <input type="email" name="email" placeholder="Email">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-md-12 col-sm-12 form-column">
-                            <div class="form-inner">
-                                <form method="post" action="sendemail.php" id="contact-form" class="default-form"> 
-                                    <div class="row clearfix">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                            <input type="text" name="username" placeholder="Your Name" required="">
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                            <input type="email" name="email" placeholder="Your email" required="">
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                            <input type="text" name="phone" required="" placeholder="Phone">
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                            <input type="text" name="subject" required="" placeholder="Subject">
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                            <textarea name="message" placeholder="message"></textarea>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn centred">
-                                            <button class="theme-btn btn-one shadow" type="submit" name="submit-form"><span>Send Message</span></button>
-                                        </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input type="password" name="password" placeholder="Password">
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div> 
+                                <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start m-3">
+                                    <p class="text-dark">Dont have account?</p><a href="/users/register" style="text-decoration: none;"><h5 class="text-warning ms-2">Register Now</h5></a>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
+                                    <button class="theme-btn btn-one shadow" type="submit" name="submit-form"><span>Login</span></button>
+                                </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </section> -->
-    <!-- banner-section end -->
+    </section>
+    
 </body>
 
 </html>
