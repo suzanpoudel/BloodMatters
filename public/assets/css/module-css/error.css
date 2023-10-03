@@ -1,0 +1,76 @@
+
+/** error-section **/
+
+.error-section{
+  position: relative;
+  padding: 150px 0px;
+}
+
+.error-section .error-image{
+  position: relative;
+  display: block;
+  margin-bottom: 45px;
+}
+
+.error-section h2{
+  display: block;
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: 600;
+  margin-bottom: 43px;
+}
+
+.error-section .theme-btn{
+  padding: 18px 42px;
+}
+
+.error-section .theme-btn i{
+  position: relative;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 6px;
+  top: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,215 @@
+
+/** project-details **/
+
+.project-details{
+  position: relative;
+}
+
+.project-details-content{
+  position: relative;
+  display: block;
+}
+
+.project-details-content .title-box span{
+  position: relative;
+  display: block;
+  margin-bottom: 9px;
+}
+
+.project-details-content .title-box h2{
+  display: block;
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.project-details-content .title-box{
+  position: relative;
+  display: block;
+  margin-bottom: 54px;
+}
+
+.project-details-content .info-inner{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-details-content .info-inner .info-list li{
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin-right: 70px;
+  font-size: 17px;
+  line-height: 28px;
+}
+
+.project-details-content .info-inner .info-list li:last-child{
+  margin: 0px !important;
+}
+
+.project-details-content .info-inner .info-list li span{
+  display: block;
+  font-weight: 500;
+}
+
+.project-details-content .info-inner .social-links li{
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+}
+
+.project-details-content .info-inner .social-links li:last-child{
+  margin: 0px !important;
+}
+
+.project-details-content .info-inner .social-links li a{
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  background: #EBF5E9;
+  color: #101A30;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.project-details-content .info-inner .social-links li a:hover{
+  background: var(--theme-color);
+  color: #fff;
+}
+
+.project-details-content .image-box{
+  position: relative;
+  display: block;
+  border-radius: 20px;
+}
+
+.project-details-content .image-box img{
+  width: 100%;
+  border-radius: 20px;
+}
+
+.project-details-content .text-box h3{
+  display: block;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.project-details-content .text-box p{
+  margin-bottom: 26px;
+}
+
+.project-details-content .text-box p:last-child{
+  margin-bottom: 0px;
+}
+
+.project-details-content .nav-btn{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0px;
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.project-details-content .nav-btn .single-btn{
+  position: relative;
+  display: block;
+}
+
+.project-details-content .nav-btn .single-btn a{
+  position: absolute;
+  top: 0px;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50px;
+  font-size: 16px;
+  color: #222;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.project-details-content .nav-btn .single-btn a:hover{
+  color: #fff;
+  background: var(--theme-color);
+  border-color: var(--theme-color);
+}
+
+.project-details-content .nav-btn .single-btn.prev-btn a{
+  left: 0px;
+}
+
+.project-details-content .nav-btn .single-btn.next-btn a{
+  right: 0px;
+}
+
+.project-details-content .nav-btn .single-btn h3{
+  display: block;
+  font-size: 24px;
+  line-height: 60px;
+  font-weight: 600;
+}
+
+.project-details-content .nav-btn .single-btn.prev-btn{
+  padding-left: 75px;
+}
+
+.project-details-content .nav-btn .single-btn.next-btn{
+  padding-right: 75px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

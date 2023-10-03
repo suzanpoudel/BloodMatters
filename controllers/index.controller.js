@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer')
 
 
 exports.welcome = async (req, res) => {
-  res.render("index");
+  res.render("./landing/index");
 };
 
 exports.contactPage = async (req, res) => {
