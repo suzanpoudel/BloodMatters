@@ -178,7 +178,7 @@ exports.userRequestBlood = async (req, res, next) => {
     let details = {
         from : `${process.env.ADMIN_EMAIL}`,
         to : [...emailList],
-        // to : 'bloodmatters001@gmail.com',
+        // to : `${process.env.ADMIN_EMAIL}`,
         subject : "Blood Request",
         html: `${output}`
     }
@@ -502,7 +502,7 @@ exports.registerUser = async (req, res) => {
     errors.push({msg:"Invalid Date of Birth!"})
   }
 
-  const phonePattern = /^(01\d{7}|98\d{8})$/;
+  const phonePattern = /^(01\d{7}|98\d{8}|97\d{8})$/;
   function validatePhone(phone) {
     // Test the phone number against the pattern and return the result
     return phonePattern.test(phone);
@@ -519,8 +519,8 @@ exports.registerUser = async (req, res) => {
     errors.push({ msg: "Invalid email" });
   }
 
-  if (password.length < 6) {
-    errors.push({ msg: "Password must be at least 6 characters!!" });
+  if (password.length < 7) {
+    errors.push({ msg: "Password must be at least 7 characters!!" });
   }
 
   if (validatePhone(phonenumber) == false) {
