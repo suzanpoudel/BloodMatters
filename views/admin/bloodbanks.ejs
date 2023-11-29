@@ -25,26 +25,28 @@ $(document).ready(function () {
             <input type="text" id="search" class="form-control" placeholder="Search here" aria-label="Search" />
           </div>
         <%- include('.././partials/messages.ejs'); %>
-          <div class="container d-flex flex-wrap justify-content-sm-start">
+          <div class="container d-flex flex-wrap justify-content-center justify-content-md-start">
             <% banks.forEach(bank => { %>
-                            <div class="card col-4 mb-2" id="bank">
-                                <div class="card-body">
-                                    <h5 class="card-title text-danger-custom"><b><%=bank.name%></b></h5>
-                                    <p class="card-text"><%=bank.address%></p>
-                                    <p class="card-text lead"><%=bank.contact%></p>
-                                </div>
-                                <div class="m-3">
-                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#bloodcountModal<%=bank._id%>">
-                                        Check Blood Quantity
-                                    </button>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bankEditModal<%=bank._id%>">
-                                    <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#bankDeleteModal<%=bank._id%>">
-                                      <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                        </div>
+                            <div class="col-12 col-md-6 p-3">
+                              <div class="card" id="bank">
+                                  <div class="card-body">
+                                      <h5 class="card-title text-danger-custom"><b><%=bank.name%></b></h5>
+                                      <p class="card-text"><%=bank.address%></p>
+                                      <p class="card-text lead"><%=bank.contact%></p>
+                                  </div>
+                                  <div class="m-3">
+                                      <button type="button" class="btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#bloodcountModal<%=bank._id%>">
+                                          Check Blood Quantity
+                                      </button>
+                                      <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#bankEditModal<%=bank._id%>">
+                                      <i class="fas fa-edit"></i>
+                                      </button>
+                                      <button type="button" class="btn btn-danger-custom m-1" data-bs-toggle="modal" data-bs-target="#bankDeleteModal<%=bank._id%>">
+                                        <i class="fas fa-trash"></i>
+                                      </button>
+                                  </div>
+                              </div>
+                            </div>
                     
                     <!-- Blood group modal -->
                         <div class="modal fade" id="bloodcountModal<%=bank._id%>" tabindex="-1" role="dialog" aria-labelledby="bloodcountModalLabel" aria-hidden="true">
