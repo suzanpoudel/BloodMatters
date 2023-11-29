@@ -150,7 +150,7 @@ exports.getUserById = async (req, res) => {
   try {
     const profile = await User.findOne({ _id: req.params.id });
     console.log(profile);
-    res.render("./user/userinfo", {
+    res.render("./user/userInfo", {
       user: req.user,
       profile,
       moment,
