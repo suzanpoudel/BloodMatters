@@ -35,11 +35,11 @@ exports.getProfile = async (req, res) =>
   );
 
 exports.getLogin = async (req, res) => {
-  res.render("login");
+  res.render("./landing/login");
 };
 
 exports.getRegister = async (req, res) => {
-  res.render("register");
+  res.render("./landing/register");
 };
 
 exports.updateUserStatus = async (req, res) => {
@@ -528,7 +528,7 @@ exports.registerUser = async (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render("register", {
+    res.render("./landing/register", {
       errors,
       name,
       email,
@@ -544,7 +544,7 @@ exports.registerUser = async (req, res) => {
     User.findOne({ email: email }).then((user) => {
       if (user) {
         errors.push({ msg: "Email already exists" });
-        res.render("register", {
+        res.render("./landing/register", {
           errors,
           name,
           email,

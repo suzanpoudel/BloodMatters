@@ -1,0 +1,270 @@
+
+/** cta-section **/
+
+.cta-section{
+  padding: 150px 0px 365px 0px;
+  overflow: hidden;
+}
+
+.cta-section .bg-layer:before{
+  position: absolute;
+  content: '';
+  background: #02402C;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  opacity: 0.85;
+}
+
+.cta-section h2{
+  display: block;
+  font-size: 50px;
+  line-height: 50px;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.cta-section .btn-box{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-section .btn-box .theme-btn.btn-one{
+  margin-right: 10px;
+}
+
+.cta-section .btn-box .theme-btn.btn-one span{
+  padding: 18px 40px;
+}
+
+.cta-section .pattern-layer{
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 71px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+
+/** cta-style-two **/
+
+.cta-style-two{
+  position: relative;
+  padding: 55px 0px 81px 0px;
+  background-color: #ECFEF4;
+  overflow: hidden;
+}
+
+.cta-style-two .image-box{
+  position: relative;
+  margin-right: 63px;
+}
+
+.cta-style-two .image-box .image{
+  position: relative;
+  max-width: 523px;
+}
+
+.cta-style-two .image-box .image img{
+  width: 100%;
+}
+
+.cta-style-two .image-box .image-shape{
+  position: absolute;
+  top: 65px;
+  right: -30px;
+  width: 148px;
+  height: 148px;
+  background-repeat: no-repeat;
+  -webkit-animation: zoom-fade 4s infinite linear;
+  animation: zoom-fade 4s infinite linear;
+}
+
+.cta-style-two .content-box{
+  position: relative;
+  display: block;
+}
+
+.cta-style-two .content-box h2{
+  display: block;
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.cta-style-two .content-box .btn-box{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cta-style-two .content-box .btn-box .theme-btn.btn-one{
+  margin-right: 10px;
+}
+
+.cta-style-two .content-box .btn-box .theme-btn.btn-two{
+  border-color: #101A30;
+  color: #101A30 !important;
+}
+
+.cta-style-two .content-box .btn-box .theme-btn.btn-two:hover{
+  color: #fff !important;
+}
+
+.cta-style-two .pattern-layer .pattern-1{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cta-style-two .pattern-layer .pattern-2{
+  position: absolute;
+  left: -72px;
+  bottom: 30px;
+  width: 148px;
+  height: 148px;
+  background-repeat: no-repeat;
+  -webkit-animation: zoom-fade 4s infinite linear;
+  animation: zoom-fade 4s infinite linear;
+}
+
+.cta-style-two .pattern-layer .pattern-3{
+  position: absolute;
+  right: -72px;
+  top: 30px;
+  width: 148px;
+  height: 148px;
+  background-repeat: no-repeat;
+  -webkit-animation: zoom-fade 4s infinite linear;
+  animation: zoom-fade 4s infinite linear;
+}
+
+.cta-style-two .pattern-layer .pattern-4{
+  position: absolute;
+  left: 130px;
+  top: 120px;
+  width: 113px;
+  height: 108px;
+  background-repeat: no-repeat;
+}
+
+.cta-style-two .pattern-layer .pattern-5{
+  position: absolute;
+  right: 110px;
+  bottom: 80px;
+  width: 115px;
+  height: 115px;
+  background-repeat: no-repeat;
+}
+
+
+/** cta-style-three **/
+
+.cta-style-three{
+  overflow: hidden;
+}
+
+.cta-style-three .inner-box{
+  position: relative;
+  display: block;
+  max-width: 610px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(7.5px);
+  border-radius: 20px;
+  padding: 62px 70px 70px 70px;
+}
+
+.cta-style-three .inner-box h2{
+  display: block;
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: 700;
+  margin-bottom: 43px;
+}
+
+.cta-style-three .inner-box h2 span{
+  color: var(--theme-color);
+}
+
+.cta-style-three .inner-box .btn-box{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cta-style-three .inner-box .btn-box .theme-btn.btn-one{
+  margin-right: 10px;
+}
+
+.cta-style-three .inner-box .btn-box .theme-btn.btn-one span{
+  padding: 18px 40px;
+}
+
+.cta-style-three .inner-box .btn-box .theme-btn.btn-two{
+  border-color: #101A30;
+  color: #101A30 !important;
+}
+
+.cta-style-three .inner-box .btn-box .theme-btn.btn-two:hover{
+  color: #fff !important;
+}
+
+.cta-style-three .inner-box .btn-box .theme-btn.btn-two span{
+  padding: 16px 32px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

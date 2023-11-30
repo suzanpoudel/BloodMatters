@@ -4,15 +4,32 @@ const nodemailer = require('nodemailer')
 
 
 exports.welcome = async (req, res) => {
-  res.render("index");
+  res.render("./landing/index");
 };
 
 exports.contactPage = async (req, res) => {
-  res.render("contact");
+  res.render("./landing/contact");
+};
+
+exports.getBlog = async (req, res) => {
+  try {
+    const posts = await Post.find({ postType: "info" })
+      .sort({ updatedAt: "desc" })
+      .populate("creator", "-password -isAdmin -date -_v")
+      .exec();
+    res.render("./landing/blog", {
+      posts,
+      moment,
+    });
+  } catch (err) {
+    console.log(err);
+    res.flash("error_msg", "Something went wrong");
+    res.redirect("/");
+  }
 };
 
 exports.aboutus = async (req, res) => {
-  res.render("aboutus");
+  res.render("./landing/aboutus");
 };
 
 exports.submitContactForm = async(req,res)=>{
@@ -56,7 +73,7 @@ exports.submitContactForm = async(req,res)=>{
   }
 
   if (errors.length > 0) {
-    res.render("contact", {
+    res.render("./landing/contact", {
       errors,
       name,
       email,
@@ -133,7 +150,7 @@ exports.getUserById = async (req, res) => {
   try {
     const profile = await User.findOne({ _id: req.params.id });
     console.log(profile);
-    res.render("./user/userinfo", {
+    res.render("./user/userInfo", {
       user: req.user,
       profile,
       moment,

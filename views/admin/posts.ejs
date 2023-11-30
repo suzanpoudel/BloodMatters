@@ -12,23 +12,19 @@
   integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
   crossorigin="anonymous"
 />
-<!-- <script>
-    $(document).ready(function(){
-  $(".edit_btn").click(function(){
-    $(".edit_modal").attr('id','test');
-  });
-});
-</script> -->
+<link rel="stylesheet" href="/public/card.css">
 
 <main>
   <div class="px-4 py-5 my-5">
     <%- include('.././partials/messages.ejs'); %>
     <% posts.forEach(Post => { %>
-            <div class="card col-6 mx-auto my-5 border-1 border-dark bg-dark bg-opacity-10">
+            <div class="card col-md-6 offset-md-3 px-3 pb-3 mt-4 border-brand">
                 <div class="card-body">
                     <p class="card-text"><small class="text-muted"><%= moment(Post.updatedAt).format('LLLL')%></small></p>
-                    <h5 class="card-title"><%= Post.title%></h5>
-                  <p class="card-text"><%= Post.body%></p>
+                    <div class="card-footer bg-danger-custom text-light">
+                      <h5 class="card-title"><%= Post.title%></h5>
+                    </div>
+                  <p class="card-text px-2 py-4"><%= Post.body%></p>
                 </div>
                 <% if (Post.imageUrl) { %>
                 <img class="card-img-top" src="<%=Post.imageUrl%>" alt="Card image cap">
@@ -39,7 +35,7 @@
                   <button type="button" class="btn btn-danger-custom" data-bs-toggle="modal" data-bs-target="#deletePostModal<%=Post._id%>">Delete <i class="fas fa-trash"></i></button>
                 </div>
               </div>
-              <hr class="border-3">
+              <hr class="border-3 my-5">
     
             <!-- Edit Post Modal -->
             <div class="modal fade edit_modal" id="editPostModal<%=Post._id%>" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">

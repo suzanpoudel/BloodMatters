@@ -1,0 +1,7 @@
+:root {
+    --brand-color: #a82020;
+}
+
+.border-brand {
+    border-color: var(--brand-color);
+}

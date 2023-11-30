@@ -1,0 +1,138 @@
+
+
+
+/* color */
+
+.main-menu .navigation > li.current > a,
+.main-menu .navigation > li:hover > a,
+.main-menu .navigation > li > ul > li > a:hover,
+.main-menu .navigation > li > .megamenu li > a:hover,
+.main-menu .navigation > li > ul > li > ul > li > a:hover,
+.scroll-to-top .scroll-bar-text,
+.header-top .top-right .login-box a:hover,
+.header-top .social-links li a:hover,
+.header-top .info-list li i,
+.main-header .menu-right-content .support-box a:hover,
+.main-header .menu-right-content .support-box i,
+.banner-carousel .content-box .title-text,
+.feature-block-one .inner-box .icon-box,
+.feature-block-one .inner-box h3 a:hover,
+.sec-title .sub-title,
+.service-block-one .inner-box .lower-content .icon-box,
+.service-block-one .inner-box .lower-content h3 a:hover,
+.image_block_two .image-box .support-box .icon-box,
+.image_block_two .image-box .support-box h5,
+.image_block_two .image-box .support-box h3 a:hover,
+.content_block_two .content-box .inner-box .single-item .icon-box,
+.news-block-one .inner-box .lower-content .post-info li i,
+.news-block-one .inner-box .lower-content .post-info li a:hover,
+.news-block-one .inner-box .lower-content h3 a:hover,
+.news-block-one .inner-box .lower-content .link a:hover,
+.main-footer a:hover,
+.main-footer .contact-widget .info-list li a:hover,
+.order-service .form-inner form .form-group .nice-select:before,
+.feature-block-two .inner-box .icon-box,
+.feature-block-two .inner-box h3 a:hover,
+.content_block_three .content-box .experience-inner h2,
+.team-block-one .inner-box .lower-content h3 a:hover,
+.team-block-one .inner-box .lower-content .designation,
+.team-block-one .inner-box .lower-content .share-box .share-icon,
+.banner-style-three .content-inner .title-text,
+.cta-style-three .inner-box h2 span,
+.news-block-two .inner-box .lower-content .category,
+.news-block-two .inner-box .lower-content h3 a:hover,
+.news-block-two .inner-box .lower-content .post-info li a:hover,
+.news-block-two .inner-box .lower-content .post-info li i,
+.default-sidebar .contact-widget .icon-box,
+.pricing-block-one .pricing-table h2,
+.project-block-two .inner-box .content-box h3 a:hover,
+.blog-sidebar .search-widget .search-form .form-group input:focus + button,
+.blog-sidebar .search-widget .search-form .form-group button,
+.blog-sidebar .post-widget .post h5 a:hover,
+.blog-details-content blockquote .icon-box,
+.contact-section .content-box .info-list li .icon
+
+{
+  color: var(--pink-color) !important;
+}
+
+
+
+/** background **/
+
+.switcher .switch_btn button,
+.main-header .menu-right-content .search-box-outer:hover,
+.theme-btn.btn-one,
+.theme-btn span:before,
+.theme-btn span:after,
+.banner-carousel .owl-nav button:hover,
+button.rtl,
+button.ltr,
+.list-style-one li:before,
+.service-block-one .inner-box .lower-content .link a:hover,
+.funfact-section,
+.materials-section .inner-container,
+.nav-style-one button:hover,
+.project-block-one .inner-box .content-box .view-btn a,
+.news-block-one .inner-box .image-box .post-date,
+.subscribe-section .form-inner .form-group button[type='submit'],
+.main-footer .contact-widget .social-links li a:hover,
+.order-service .text-box p .shape:before,
+.order-service .text-box p .shape:after,
+.feature-block-two .inner-box .link a:hover,
+.image_block_three .image-box .video-box,
+.working-block-one .inner-box .icon-box,
+.working-block-one .inner-box:hover .icon-box .count-text,
+.accordion-box .accordion .acc-btn.active,
+.team-block-one .inner-box .lower-content .share-box .social-links li a:hover,
+.header-style-two .header-lower .menu-right-content,
+.progress-box .bar-inner,
+.news-block-two .inner-box .image-box .post-date,
+.news-block-two .inner-box .lower-content .category:before,
+.default-sidebar .category-widget .category-list li a.current,
+.default-sidebar .category-widget .category-list li a:hover,
+.service-details-content .content-one .inner-box .single-item .icon-box,
+.team-details-content .content-box .social-links li a:hover,
+.pricing-section .tab-btns li:before,
+.project-block-two .inner-box .content-box .link-box a,
+.project-details-content .info-inner .social-links li a:hover,
+.project-details-content .nav-btn .single-btn a:hover,
+.pagination li a:hover,
+.pagination li a.current,
+.blog-sidebar .tags-widget .tags-list li a:hover,
+.blog-details-content blockquote h4:before,
+.blog-details-content .content-one .tags-list li a:hover,
+.blog-details-content .author-box .social-links li a:hover,
+.blog-details-content .comment-box .comment .reply-btn:hover
+
+{
+  background: var(--pink-color) !important;
+}
+
+
+
+
+/** border-color **/
+
+.main-header .menu-right-content .search-box-outer:hover,
+.subscribe-section .form-inner .form-group input:focus,
+.order-service .text-box p .shape,
+.order-service .form-inner form .form-group input:focus,
+.content_block_three .content-box .experience-inner,
+.main-footer .footer-upper .form-inner .form-group input:focus,
+.service-sidebar .question-widget .form-inner .form-group input:focus,
+.service-sidebar .question-widget .form-inner .form-group textarea:focus,
+.team-details-content .content-box .social-links li a:hover,
+.team-details .experience-skills .single-item:before,
+.default-form .form-group input:focus,
+.default-form .form-group textarea:focus,
+.project-details-content .nav-btn .single-btn a:hover,
+.pagination li a:hover,
+.pagination li a.current,
+.blog-sidebar .search-widget .search-form .form-group input:focus,
+.blog-details-content .comment-box .comment .reply-btn:hover
+
+{
+  border-color: var(--pink-color) !important;
+}
+

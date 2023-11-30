@@ -4,48 +4,108 @@
   .border{
     border-radius: 7%;
   }
+  .bg-danger-custom{
+        background-color: #a82020 !important;
+      }
+      .text-bg-danger-custom{
+        background-color: #a82020 !important;
+        color: white !important;
+      }
+
+      .text-danger-custom{
+        color: #a82020 !important;
+      }
+      
+      .btn-danger-custom{
+        background-color: #a82020 !important;
+        color: white !important;
+      }
+
+      .btn-danger-custom:hover{
+        background-color: #e93f3f !important;
+        /* transform: rotate(360deg) scale(1);
+        transition: 700ms; */
+      }
 </style>
 <header>
-<nav
-id="main-navbar"
-class="navbar navbar-expand-lg navbar-dark bg-danger-custom fixed-top"
-
->
-<!-- Container wrapper -->
-<div class="container-fluid">
-  <!-- Toggle button -->
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#sidebarMenu"
-    aria-controls="sidebarMenu"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <!-- Brand -->
-  <a class="navbar-brand" href="/">
-    <h2>Blood Matters</h2>
-  </a>
-
-  <!-- Right links -->
-  <ul class="navbar-nav ms-auto d-flex flex-row">
-    <h1></h1>
-    <a class="navbar-brand" href="/users/register">
-      <h6 class="fw-bold border border-light border-1 p-2">Register</h6>
-    </a>
-        <a class="navbar-brand" href="/aboutus">
-            <h6 class="p-2">About Us</h6>
+  <nav
+        id="main-navbar"
+        class="navbar navbar-expand-lg navbar-dark bg-danger-custom fixed-top"
+        
+        >
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu"
+            aria-controls="sidebarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        
+          <!-- Brand -->
+          <a class="navbar-brand" href="/">
+            <span style="font-weight: 500; font-size: 30px"
+            ><b class="text-light px-2">BloodMatters</b></span
+          >
           </a>
-          <a class="navbar-brand" href="/contact">
-            <h6 class="p-2">Contact Us</h6>
-          </a>
-         
-  </ul>
-</div>
-<!-- Container wrapper -->
-</nav>
+        
+          <ul class="navbar-nav ms-auto d-flex flex-row">
+            <h1></h1>
+            <!-- Avatar -->
+            <ul class="navbar-nav ms-auto d-flex flex-row">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                    href="#"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <!-- <img src="/public/images/logo1.png" class="rounded-circle"
+                        height="35" alt="Avatar" loading="lazy" /> -->
+                    <span style="font-weight: 100; font-size: 18px"
+                      ><b class="text-light">Login</b></span
+                    >
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuLink"
+                  >
+                    <li>
+                      <a class="dropdown-item" href="/users/login">User Login</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/admin/login">Admin Login</a>
+                    </li>
+                  </ul>
+                </li>
+                <a class="navbar-brand" href="/users/register">
+                    <span style="font-weight: 100; font-size: 18px"
+                    ><b class="text-light">Register</b></span
+                  >
+                </a>
+                  </a>
+                    <a class="navbar-brand" href="/aboutus">
+                        <span style="font-weight: 100; font-size: 18px"
+                  ><b class="text-light">About Us</b></span
+                >
+                      </a>
+                      <a class="navbar-brand" href="/contact">
+                        <span style="font-weight: 100; font-size: 18px"
+                  ><b class="text-light">Contact</b></span
+                >
+                      </a>
+                     
+              </ul>
+          </ul>
+        </div>
+        <!-- Container wrapper -->
+        </nav>
 </header>   

@@ -12,6 +12,8 @@
   integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
   crossorigin="anonymous"
 />
+<link rel="stylesheet" href="/public/card.css">
+
 <style>
   div.stick-at-top {
   position: -webkit-sticky;
@@ -38,7 +40,7 @@
   <%- include('.././partials/messages.ejs'); %> <% posts.forEach(Post => { %>
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="card">
+      <div class="card border-brand">
         <div class="card-body">
           <div class="card-footer bg-danger-custom text-light">
             <h5 class="card-title"><%= Post.title%></h5>

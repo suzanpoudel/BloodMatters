@@ -1,0 +1,112 @@
+
+/** funfact-section **/
+
+.funfact-section{
+  position: relative;
+  background: var(--theme-color);
+  padding: 105px 0px;
+}
+
+.funfact-block-one .inner-box{
+  position: relative;
+  display: block;
+  padding: 2px 0px 3px 120px;
+}
+
+.funfact-block-one .inner-box:before{
+  position: absolute;
+  content: '';
+  width: 3px;
+  height: 100%;
+  top: 0px;
+  left: -63px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.funfact-block-one:first-child .inner-box:before{
+  display: none;
+}
+
+.funfact-block-one .inner-box .icon-box{
+  position: absolute;
+  display: inline-block;
+  left: 0px;
+  top: 0px;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+  font-size: 40px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  border-radius: 50%;
+}
+
+.funfact-block-one .inner-box .count-outer{
+  position: relative;
+  display: block;
+  font-size: 50px;
+  line-height: 50px;
+  font-family: var(--title-font);
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.funfact-block-one .inner-box h4{
+  display: block;
+  font-size: 20px;
+  line-height: 28px;
+  color: #fff;
+}
+
+.funfact-section .inner-container{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
